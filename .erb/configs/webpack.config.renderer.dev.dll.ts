@@ -31,7 +31,11 @@ const configuration: webpack.Configuration = {
   module: require('./webpack.config.renderer.dev').default.module,
 
   entry: {
-    renderer: Object.keys(dependencies || {}),
+    renderer: [
+      ...Object.keys(dependencies || {}),
+      '@heroicons/react/solid',
+      '@heroicons/react/outline',
+    ].filter((key) => key !== '@heroicons/react'),
   },
 
   output: {
