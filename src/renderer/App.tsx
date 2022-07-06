@@ -7,6 +7,11 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />} />
+        <Route path="/studenten" element={<Layout />} />
+        <Route path="/pruefungstermine" element={<Layout />} />
+        <Route path="/pruefungsteilnahmen" element={<Layout />} />
+        <Route path="/kurse" element={<Layout />} />
+        <Route path="/module" element={<Layout />} />
       </Routes>
     </Router>
   );
