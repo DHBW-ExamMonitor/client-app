@@ -8,18 +8,29 @@ import {
 } from '@heroicons/react/outline';
 
 import clsx from 'clsx';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../../../../assets/logo.png';
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Kurse', href: '#', icon: UsersIcon, current: false },
-  { name: 'Studierende', href: '#', icon: FolderIcon, current: false },
-  { name: 'Module', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Prüfungstermin', href: '#', icon: InboxIcon, current: false },
-  { name: 'Prüfungsteilnahme', href: '#', icon: ChartBarIcon, current: false },
+  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
+  { name: 'Kurse', href: '/kurse', icon: UsersIcon },
+  { name: 'Studierende', href: '/studenten', icon: FolderIcon },
+  { name: 'Module', href: '/module', icon: CalendarIcon },
+  {
+    name: 'Prüfungstermin',
+    href: '/pruefungstermine',
+    icon: InboxIcon,
+  },
+  {
+    name: 'Prüfungsteilnahme',
+    href: '/pruefungsteilnahmen',
+    icon: ChartBarIcon,
+  },
 ];
 
 export const SideBar: React.FC = () => {
+  const location = useLocation();
+
   return (
     <div className="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white">
       <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
@@ -28,27 +39,28 @@ export const SideBar: React.FC = () => {
         </div>
         <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
           {navigation.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              className={clsx(
-                item.current
-                  ? 'bg-gray-100 text-gray-900'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
-              )}
-            >
-              <item.icon
+            <Link to={item.href}>
+              <div
+                key={item.name}
                 className={clsx(
-                  item.current
-                    ? 'text-gray-500'
-                    : 'text-gray-400 group-hover:text-gray-500',
-                  'mr-3 flex-shrink-0 h-6 w-6'
+                  item.href === location.pathname
+                    ? 'bg-gray-100 text-gray-900'
+                    : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                  'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
                 )}
-                aria-hidden="true"
-              />
-              {item.name}
-            </a>
+              >
+                <item.icon
+                  className={clsx(
+                    item.href === location.pathname
+                      ? 'text-gray-500'
+                      : 'text-gray-400 group-hover:text-gray-500',
+                    'mr-3 flex-shrink-0 h-6 w-6'
+                  )}
+                  aria-hidden="true"
+                />
+                {item.name}
+              </div>
+            </Link>
           ))}
         </nav>
       </div>
