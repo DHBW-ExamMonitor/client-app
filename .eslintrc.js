@@ -8,6 +8,12 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'import/no-named-as-default': 'off',
     'react/prop-types': 'off',
+    'react/button-has-type': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/require-default-props': 'off',
+    'react/self-closing-comp': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
+    'no-console': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,

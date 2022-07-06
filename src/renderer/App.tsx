@@ -1,7 +1,9 @@
 import { MemoryRouter as Router, Route, Routes } from 'react-router-dom';
 import 'tailwindcss/tailwind.css';
 import Layout from './components/Layout';
+import Courses from './pages/Courses';
 import Dashboard from './pages/Dashboard';
+import Students from './pages/Students';
 
 export default function App() {
   return (
@@ -12,11 +14,8 @@ export default function App() {
             path="dashboard"
             element={<Dashboard pageTitle="Dashboard" />}
           />
-          <Route path="kurse" element={<Dashboard pageTitle="Kurse" />} />
-          <Route
-            path="studenten"
-            element={<Dashboard pageTitle="Studenten" />}
-          />
+          <Route path="kurse" element={<Courses />} />
+          <Route path="studenten" element={<Students />} />
           <Route path="module" element={<Dashboard pageTitle="Module" />} />
           <Route
             path="pruefungstermine"
