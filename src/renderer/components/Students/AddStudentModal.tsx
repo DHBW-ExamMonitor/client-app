@@ -8,6 +8,7 @@ import InputField from '../Ui/InputField';
 import Modal from '../Ui/Modal';
 
 type AddStudentModalFormProps = {
+  name: string;
   matrikelnummer: string;
   kursId: string;
   studentenStatus: string;
@@ -15,6 +16,7 @@ type AddStudentModalFormProps = {
 
 const createStudent = async (values: AddStudentModalFormProps) => {
   const test = await axios.post('http://localhost:3000/studenten', {
+    name: values.name,
     matrikelnummer: values.matrikelnummer,
     kursId: values.kursId,
     studentenStatus: values.studentenStatus,
@@ -48,6 +50,7 @@ export const AddStudentModal: React.FC<AddStudentModalProps> = ({
     <Modal open={open} setOpen={setOpen}>
       <Formik
         initialValues={{
+          name: '',
           matrikelnummer: '',
           kursId: '',
           studentenStatus: 'IMMATRIKULIERT',

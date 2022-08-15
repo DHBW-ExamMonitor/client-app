@@ -1,8 +1,7 @@
 import { render } from 'react-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from 'react-query';
+import { queryClient } from './api/api';
 import App from './App';
-
-const queryClient = new QueryClient();
 
 render(
   <QueryClientProvider client={queryClient}>
