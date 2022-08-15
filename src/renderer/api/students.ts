@@ -1,4 +1,4 @@
-import { Students } from 'renderer/types/student';
+import { Student, Students } from 'renderer/types/student';
 import api from './api';
 
 export const getStudents = async (): Promise<Students> => {
@@ -17,5 +17,11 @@ export type CreateStudentDto = {
 export const createStudent = async (values: CreateStudentDto) => {
   const post = await api.post('/studenten', values);
   const data = await post.data;
+  return data;
+};
+
+export const updateStudent = async (values: Student) => {
+  const put = await api.put(`/studenten/${values.id}`, values);
+  const data = await put.data;
   return data;
 };
