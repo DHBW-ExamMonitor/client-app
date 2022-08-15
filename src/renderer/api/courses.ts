@@ -7,7 +7,12 @@ export const getCourses = async (): Promise<Courses> => {
   return data;
 };
 
-export const createCourse = async (course: CreateOrUpdateCourse) => {
+export type CreateCourseDto = {
+  name: string;
+  jahrgang: string;
+};
+
+export const createCourse = async (course: CreateCourseDto) => {
   const post = await api.post('/kurse', course);
   const data = await post.data;
   return data;

@@ -11,6 +11,7 @@ export type CreateOrUpdateStudent = {
 
 export type Student = {
   id: string;
+  name: string;
   matrikelnummer: string;
   studentenStatus: StudentType;
   kursId: string;

@@ -1,31 +1,15 @@
-import axios from 'axios';
 import clsx from 'clsx';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
-import { useMutation } from 'react-query';
-import Button from '../Ui/Button';
-import InputField from '../Ui/InputField';
-import Modal from '../Ui/Modal';
+import { useMutation, useQuery } from 'react-query';
+import { getCourses } from 'renderer/api/courses';
+import { createStudent, CreateStudentDto } from 'renderer/api/students';
+import Button from 'renderer/components/Ui/Button';
+import InputField from 'renderer/components/Ui/InputField';
+import Modal from 'renderer/components/Ui/Modal';
+import { StudentType } from 'renderer/types/student';
 
-type AddStudentModalFormProps = {
-  name: string;
-  matrikelnummer: string;
-  kursId: string;
-  studentenStatus: string;
-};
-
-const createStudent = async (values: AddStudentModalFormProps) => {
-  const test = await axios.post('http://localhost:3000/studenten', {
-    name: values.name,
-    matrikelnummer: values.matrikelnummer,
-    kursId: values.kursId,
-    studentenStatus: values.studentenStatus,
-  });
-  const data = await test.data;
-  return data;
-};
-
-export interface AddStudentModalProps {
+export interface CreateStudentModalProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }
@@ -33,14 +17,15 @@ export interface AddStudentModalProps {
 /**
  * AddStudentModal Component
  */
-export const AddStudentModal: React.FC<AddStudentModalProps> = ({
+export const CreateStudentModal: React.FC<CreateStudentModalProps> = ({
   open,
   setOpen,
 }) => {
+  const { data } = useQuery('courses', getCourses);
   const { mutate } = useMutation(
-    (values: AddStudentModalFormProps) => createStudent(values),
+    (values: CreateStudentDto) => createStudent(values),
     {
-      onError: (err: any) => {
+      onError: (err) => {
         // eslint-disable-next-line no-alert
         console.log(err);
       },
@@ -53,7 +38,7 @@ export const AddStudentModal: React.FC<AddStudentModalProps> = ({
           name: '',
           matrikelnummer: '',
           kursId: '',
-          studentenStatus: 'IMMATRIKULIERT',
+          studentenStatus: StudentType.IMMATRIKULIERT,
         }}
         onSubmit={(values) => {
           console.log(values);
@@ -66,8 +51,20 @@ export const AddStudentModal: React.FC<AddStudentModalProps> = ({
           }
         }}
       >
-        <Form>
+        <Form className="space-y-6">
           <Field name="name">
+            {({ field, meta }: FieldProps) => (
+              <InputField
+                field={field}
+                meta={meta}
+                label="Name"
+                type="text"
+                placeholder="Name"
+              />
+            )}
+          </Field>
+
+          <Field name="matrikelnummer">
             {({ field, meta }: FieldProps) => (
               <InputField
                 field={field}
@@ -78,9 +75,10 @@ export const AddStudentModal: React.FC<AddStudentModalProps> = ({
               />
             )}
           </Field>
-          <div className="mt-2">
+
+          <div>
             <label
-              htmlFor="service"
+              htmlFor="studentenStatus"
               className="block text-sm font-medium text-gray-700"
             >
               Status
@@ -88,7 +86,7 @@ export const AddStudentModal: React.FC<AddStudentModalProps> = ({
 
             <Field
               as="select"
-              name="service"
+              name="studentenStatus"
               className={clsx(
                 'border-gray-300',
                 'mt-1 text-sm block font-medium w-full rounded-md text-gray-900 shadow-sm focus:border-gray-500 focus:ring-gray-500'
@@ -102,9 +100,9 @@ export const AddStudentModal: React.FC<AddStudentModalProps> = ({
             </Field>
           </div>
 
-          <div className="mt-2">
+          <div>
             <label
-              htmlFor="service"
+              htmlFor="kursId"
               className="block text-sm font-medium text-gray-700"
             >
               Kurs
@@ -112,15 +110,16 @@ export const AddStudentModal: React.FC<AddStudentModalProps> = ({
 
             <Field
               as="select"
-              name="service"
+              name="kursId"
               className={clsx(
                 'border-gray-300',
                 'mt-1 text-sm block font-medium w-full rounded-md text-gray-900 shadow-sm focus:border-gray-500 focus:ring-gray-500'
               )}
             >
-              {['WWIBE119'].map((course) => (
-                <option key={course} value={course}>
-                  {course}
+              <option>Auswählen...</option>
+              {data?.map((course) => (
+                <option key={course.id} value={course.id}>
+                  {course.name}
                 </option>
               ))}
             </Field>
@@ -138,4 +137,4 @@ export const AddStudentModal: React.FC<AddStudentModalProps> = ({
   );
 };
 
-export default AddStudentModal;
+export default CreateStudentModal;
