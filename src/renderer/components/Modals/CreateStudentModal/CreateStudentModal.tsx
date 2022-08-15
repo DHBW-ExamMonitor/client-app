@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useMutation, useQuery } from 'react-query';
+import { queryClient } from 'renderer/api/api';
 import { getCourses } from 'renderer/api/courses';
 import { createStudent, CreateStudentDto } from 'renderer/api/students';
 import Button from 'renderer/components/Ui/Button';
@@ -25,6 +26,9 @@ export const CreateStudentModal: React.FC<CreateStudentModalProps> = ({
   const { mutate } = useMutation(
     (values: CreateStudentDto) => createStudent(values),
     {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['students']);
+      },
       onError: (err) => {
         // eslint-disable-next-line no-alert
         console.log(err);
@@ -32,13 +36,13 @@ export const CreateStudentModal: React.FC<CreateStudentModalProps> = ({
     }
   );
   return (
-    <Modal open={open} setOpen={setOpen}>
+    <Modal open={open}>
       <Formik
         initialValues={{
           name: '',
           matrikelnummer: '',
           kursId: '',
-          studentenStatus: StudentType.IMMATRIKULIERT,
+          studentenStatus: StudentType.IMMATRIKULIERT.toString(),
         }}
         onSubmit={(values) => {
           console.log(values);

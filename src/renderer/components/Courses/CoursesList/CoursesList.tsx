@@ -1,19 +1,19 @@
 import React from 'react';
-import { Modules } from 'renderer/types/module';
-import ModulesListItem from './ModulesListItem';
+import { Courses } from 'renderer/types/course';
+import CoursesListItem from './CoursesListItem';
 
-export interface ModulesListProps {
-  data?: Modules;
+export interface CoursesListProps {
+  data?: Courses;
 }
 
 /**
- * ModulesList Component
+ * StudentsList Component
  */
-export const ModulesList: React.FC<ModulesListProps> = ({ data }) => {
+export const CoursesList: React.FC<CoursesListProps> = ({ data }) => {
   if (!data || !data.length)
     return (
       <div>
-        <p>Keine Module gefunden.</p>
+        <p>Keine Studierenden gefunden.</p>
       </div>
     );
 
@@ -32,22 +32,29 @@ export const ModulesList: React.FC<ModulesListProps> = ({ data }) => {
               scope="col"
               className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
             >
-              Vorlesungen
+              Jahrgang
+            </th>
+            {/*
+            <th
+              scope="col"
+              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+            >
+              Status
             </th>
             <th
               scope="col"
               className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
             >
-              Aktiv
+              Kurs-ID
             </th>
             <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
               <span className="sr-only">Edit</span>
-            </th>
+            </th> */}
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
-          {data?.map((module) => (
-            <ModulesListItem module={module} />
+          {data?.map((student) => (
+            <CoursesListItem course={student} />
           ))}
         </tbody>
       </table>
@@ -55,4 +62,4 @@ export const ModulesList: React.FC<ModulesListProps> = ({ data }) => {
   );
 };
 
-export default ModulesList;
+export default CoursesList;

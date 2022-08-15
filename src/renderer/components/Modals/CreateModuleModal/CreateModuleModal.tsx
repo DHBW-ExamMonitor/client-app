@@ -33,7 +33,7 @@ export const CreateModuleModal: React.FC<CreateModuleModalProps> = ({
   );
 
   return (
-    <Modal open={open} setOpen={setOpen}>
+    <Modal open={open}>
       <Formik
         initialValues={{
           name: '',

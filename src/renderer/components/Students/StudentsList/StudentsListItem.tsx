@@ -1,9 +1,9 @@
 import React from 'react';
+import { useQuery } from 'react-query';
+import { getCourses } from 'renderer/api/courses';
 import { Student } from 'renderer/types/student';
 
 export interface StudentsListItemProps {
-  children?: React.ReactNode;
-  className?: string;
   student: Student;
 }
 
@@ -11,10 +11,12 @@ export interface StudentsListItemProps {
  * StudentsListItem Component
  */
 export const StudentsListItem: React.FC<StudentsListItemProps> = ({
-  children,
-  className,
   student,
 }) => {
+  const { data } = useQuery('courses', getCourses);
+
+  const course = data?.find((c) => c.id === student.kursId);
+
   return (
     <tr>
       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
@@ -27,7 +29,7 @@ export const StudentsListItem: React.FC<StudentsListItemProps> = ({
         {student.studentenStatus}
       </td>
       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-        {student.kursId}
+        {course?.name}
       </td>
       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
         <div className="text-indigo-600 hover:text-indigo-900">

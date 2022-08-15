@@ -1,8 +1,4 @@
-import {
-  CreateOrUpdateStudent,
-  Students,
-  StudentType,
-} from 'renderer/types/student';
+import { Students } from 'renderer/types/student';
 import api from './api';
 
 export const getStudents = async (): Promise<Students> => {
@@ -14,16 +10,12 @@ export const getStudents = async (): Promise<Students> => {
 export type CreateStudentDto = {
   name: string;
   matrikelnummer: string;
-  studentenStatus: StudentType;
+  studentenStatus: string;
   kursId: string;
 };
 
-export const createStudent = async (values: CreateOrUpdateStudent) => {
-  const post = await api.post('/studenten', {
-    matrikelnummer: values.matrikelnummer,
-    kursId: values.kursId,
-    studentenStatus: values.studentenStatus,
-  });
+export const createStudent = async (values: CreateStudentDto) => {
+  const post = await api.post('/studenten', values);
   const data = await post.data;
   return data;
 };

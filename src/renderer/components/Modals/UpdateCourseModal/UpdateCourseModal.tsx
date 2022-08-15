@@ -1,34 +1,33 @@
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
-import { useMutation } from 'react-query';
-import { queryClient } from 'renderer/api/api';
-import { updateModule } from 'renderer/api/modules';
+import { useMutation, useQueryClient } from 'react-query';
+import { updateCourse } from 'renderer/api/courses';
 import Button from 'renderer/components/Ui/Button';
-import CheckboxField from 'renderer/components/Ui/CheckboxField';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
-import { Module } from 'renderer/types/module';
+import { Course } from 'renderer/types/course';
 
-export interface UpdateModuleModalProps {
+export interface UpdateCourseModalProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  module: Module;
+  course: Course;
 }
 
 /**
- * UpdateModuleModal Component
+ * UpdateCourseModal Component
  */
-export const UpdateModuleModal: React.FC<UpdateModuleModalProps> = ({
+export const UpdateCourseModal: React.FC<UpdateCourseModalProps> = ({
   open,
   setOpen,
-  module,
+  course,
 }) => {
-  const { mutate } = useMutation((values: Module) => updateModule(values), {
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation((values: Course) => updateCourse(values), {
     onSuccess: () => {
-      queryClient.invalidateQueries(['modules']);
+      queryClient.invalidateQueries('courses');
     },
     onError: (err) => {
-      // eslint-disable-next-line no-alert
       console.log(err);
     },
   });
@@ -37,14 +36,17 @@ export const UpdateModuleModal: React.FC<UpdateModuleModalProps> = ({
     <Modal open={open}>
       <Formik
         initialValues={{
-          name: module.name ?? '',
-          vorlesungen: module.vorlesungen ?? '',
-          aktiv: module.aktiv ?? false,
+          name: course.name ?? '',
+          jahrgang: course.jahrgang ?? new Date().getFullYear(),
         }}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
           console.log(values);
           try {
-            mutate({ id: module.id, ...values });
+            mutate({
+              id: course.id,
+              name: values.name,
+              jahrgang: values.jahrgang.toString(),
+            });
           } catch (error) {
             console.log(error);
           } finally {
@@ -65,26 +67,24 @@ export const UpdateModuleModal: React.FC<UpdateModuleModalProps> = ({
             )}
           </Field>
 
-          <Field name="vorlesungen">
+          <Field name="jahrgang">
             {({ field, meta }: FieldProps) => (
               <InputField
                 field={field}
                 meta={meta}
-                label="Vorlesungen"
-                type="text"
-                placeholder="Vorlesungen"
+                label="Jahrgang"
+                type="number"
+                placeholder="Jahrgang"
               />
             )}
           </Field>
 
-          <Field name="aktiv">
-            {({ field, meta }: FieldProps) => (
-              <CheckboxField field={field} meta={meta} label="Aktiv" />
-            )}
-          </Field>
-
           <div className="flex mt-4 justify-end">
-            <Button className="mr-2" onClick={() => setOpen(false)}>
+            <Button
+              type="button"
+              className="mr-2"
+              onClick={() => setOpen(false)}
+            >
               Abbrechen
             </Button>
             <Button type="submit">Erstellen</Button>
@@ -95,4 +95,4 @@ export const UpdateModuleModal: React.FC<UpdateModuleModalProps> = ({
   );
 };
 
-export default UpdateModuleModal;
+export default UpdateCourseModal;
