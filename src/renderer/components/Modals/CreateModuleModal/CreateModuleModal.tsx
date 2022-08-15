@@ -1,25 +1,10 @@
-import axios from 'axios';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useMutation } from 'react-query';
+import { createModule, CreateModuleDto } from 'renderer/api/modules';
 import Button from 'renderer/components/Ui/Button';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
-
-type CreateModuleModalFormProps = {
-  name: string;
-  vorlesungen: string;
-};
-
-const createStudent = async (values: CreateModuleModalFormProps) => {
-  const test = await axios.post('http://localhost:3000/module', {
-    name: values.name,
-    vorlesungen: values.vorlesungen,
-  });
-  console.log(test);
-  const data = await test.data;
-  return data;
-};
 
 export interface CreateModuleModalProps {
   open: boolean;
@@ -34,9 +19,9 @@ export const CreateModuleModal: React.FC<CreateModuleModalProps> = ({
   setOpen,
 }) => {
   const { mutate } = useMutation(
-    (values: CreateModuleModalFormProps) => createStudent(values),
+    (values: CreateModuleDto) => createModule(values),
     {
-      onError: (err: any) => {
+      onError: (err) => {
         // eslint-disable-next-line no-alert
         console.log(err);
       },

@@ -1,30 +1,13 @@
-import axios from 'axios';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useMutation } from 'react-query';
 import { queryClient } from 'renderer/api/api';
+import { updateModule } from 'renderer/api/modules';
 import Button from 'renderer/components/Ui/Button';
 import CheckboxField from 'renderer/components/Ui/CheckboxField';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
 import { Module } from 'renderer/types/module';
-
-type UpdateModuleModalFormProps = {
-  id: string;
-  name: string;
-  vorlesungen: string;
-  aktiv: boolean;
-};
-
-const updateModule = async (values: UpdateModuleModalFormProps) => {
-  const update = await axios.put(`http://localhost:3000/module/${values.id}`, {
-    name: values.name,
-    vorlesungen: values.vorlesungen,
-    aktiv: values.aktiv,
-  });
-  const data = await update.data;
-  return data;
-};
 
 export interface UpdateModuleModalProps {
   open: boolean;
@@ -40,18 +23,15 @@ export const UpdateModuleModal: React.FC<UpdateModuleModalProps> = ({
   setOpen,
   module,
 }) => {
-  const { mutate } = useMutation(
-    (values: UpdateModuleModalFormProps) => updateModule(values),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['modules']);
-      },
-      onError: (err: any) => {
-        // eslint-disable-next-line no-alert
-        console.log(err);
-      },
-    }
-  );
+  const { mutate } = useMutation((values: Module) => updateModule(values), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['modules']);
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-alert
+      console.log(err);
+    },
+  });
 
   return (
     <Modal open={open} setOpen={setOpen}>
