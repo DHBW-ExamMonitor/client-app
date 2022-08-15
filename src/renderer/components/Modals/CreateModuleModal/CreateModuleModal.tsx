@@ -33,7 +33,7 @@ export const CreateModuleModal: React.FC<CreateModuleModalProps> = ({
   );
 
   return (
-    <Modal open={open} setOpen={setOpen}>
+    <Modal open={open}>
       <Formik
         initialValues={{
           name: '',
@@ -76,7 +76,11 @@ export const CreateModuleModal: React.FC<CreateModuleModalProps> = ({
           </Field>
 
           <div className="flex mt-4 justify-end">
-            <Button className="mr-2" onClick={() => setOpen(false)}>
+            <Button
+              type="button"
+              className="mr-2"
+              onClick={() => setOpen(false)}
+            >
               Abbrechen
             </Button>
             <Button type="submit">Erstellen</Button>

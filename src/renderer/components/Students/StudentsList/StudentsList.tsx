@@ -3,23 +3,17 @@ import { Students } from 'renderer/types/student';
 import StudentsListItem from './StudentsListItem';
 
 export interface StudentsListProps {
-  children?: React.ReactNode;
-  className?: string;
   data?: Students;
 }
 
 /**
  * StudentsList Component
  */
-export const StudentsList: React.FC<StudentsListProps> = ({
-  children,
-  className,
-  data,
-}) => {
+export const StudentsList: React.FC<StudentsListProps> = ({ data }) => {
   if (!data || !data.length)
     return (
       <div>
-        <p>Keine Studenten gefunden.</p>
+        <p>Keine Studierenden gefunden.</p>
       </div>
     );
 
@@ -50,7 +44,7 @@ export const StudentsList: React.FC<StudentsListProps> = ({
               scope="col"
               className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
             >
-              Kurs-ID
+              Kurs
             </th>
             <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
               <span className="sr-only">Edit</span>

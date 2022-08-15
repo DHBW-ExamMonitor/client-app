@@ -1,4 +1,4 @@
-import { Courses, CreateOrUpdateCourse } from 'renderer/types/course';
+import { Course, Courses } from 'renderer/types/course';
 import api from './api';
 
 export const getCourses = async (): Promise<Courses> => {
@@ -18,8 +18,8 @@ export const createCourse = async (course: CreateCourseDto) => {
   return data;
 };
 
-export const updateCourse = async (course: CreateOrUpdateCourse) => {
-  const put = await api.put('/kurse', course);
+export const updateCourse = async (course: Course) => {
+  const put = await api.put(`/kurse/${course.id}`, course);
   const data = await put.data;
   return data;
 };

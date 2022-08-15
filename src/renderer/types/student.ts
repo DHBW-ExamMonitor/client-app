@@ -1,6 +1,6 @@
 export const enum StudentType {
-  IMMATRIKULIERT,
-  EXMATRIKULIERT,
+  IMMATRIKULIERT = 'IMMATRIKULIERT',
+  EXMATRIKULIERT = 'EXMATRIKULIERT',
 }
 
 export type CreateOrUpdateStudent = {

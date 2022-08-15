@@ -4,50 +4,53 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { queryClient } from 'renderer/api/api';
 import { getCourses } from 'renderer/api/courses';
-import { createStudent, CreateStudentDto } from 'renderer/api/students';
+import { updateStudent } from 'renderer/api/students';
 import Button from 'renderer/components/Ui/Button';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
-import { StudentType } from 'renderer/types/student';
+import { Student, StudentType } from 'renderer/types/student';
 
-export interface CreateStudentModalProps {
+export interface UpdateStudentModalProps {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  student: Student;
 }
 
 /**
  * AddStudentModal Component
  */
-export const CreateStudentModal: React.FC<CreateStudentModalProps> = ({
+export const UpdateStudentModal: React.FC<UpdateStudentModalProps> = ({
   open,
   setOpen,
+  student,
 }) => {
   const { data } = useQuery('courses', getCourses);
-  const { mutate } = useMutation(
-    (values: CreateStudentDto) => createStudent(values),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(['students']);
-      },
-      onError: (err) => {
-        // eslint-disable-next-line no-alert
-        console.log(err);
-      },
-    }
-  );
+  const { mutate } = useMutation((values: Student) => updateStudent(values), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['students']);
+    },
+    onError: (err) => {
+      // eslint-disable-next-line no-alert
+      console.log(err);
+    },
+  });
   return (
     <Modal open={open}>
       <Formik
         initialValues={{
-          name: '',
-          matrikelnummer: '',
-          kursId: '',
-          studentenStatus: StudentType.IMMATRIKULIERT.toString(),
+          name: student.name ?? '',
+          matrikelnummer: student.matrikelnummer ?? '',
+          kursId: student.kursId ?? '',
+          studentenStatus:
+            student.studentenStatus ?? StudentType.IMMATRIKULIERT.toString(),
         }}
         onSubmit={(values) => {
           console.log(values);
           try {
-            mutate(values);
+            mutate({
+              id: student.id,
+              ...values,
+            });
           } catch (error) {
             console.log(error);
           } finally {
@@ -141,4 +144,4 @@ export const CreateStudentModal: React.FC<CreateStudentModalProps> = ({
   );
 };
 
-export default CreateStudentModal;
+export default UpdateStudentModal;
