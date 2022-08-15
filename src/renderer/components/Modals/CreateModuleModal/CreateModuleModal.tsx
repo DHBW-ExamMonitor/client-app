@@ -1,6 +1,7 @@
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useMutation } from 'react-query';
+import { queryClient } from 'renderer/api/api';
 import { createModule, CreateModuleDto } from 'renderer/api/modules';
 import Button from 'renderer/components/Ui/Button';
 import InputField from 'renderer/components/Ui/InputField';
@@ -21,6 +22,9 @@ export const CreateModuleModal: React.FC<CreateModuleModalProps> = ({
   const { mutate } = useMutation(
     (values: CreateModuleDto) => createModule(values),
     {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['modules']);
+      },
       onError: (err) => {
         // eslint-disable-next-line no-alert
         console.log(err);

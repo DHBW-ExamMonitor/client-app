@@ -6,11 +6,11 @@ import Button from 'renderer/components/Ui/Button';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
 
-type AddCourseModalFormProps = {
+type CreateCourseModalFormProps = {
   name: string;
 };
 
-const createCourse = async (values: AddCourseModalFormProps) => {
+const createCourse = async (values: CreateCourseModalFormProps) => {
   const course = await axios.post('http://localhost:3000/kurse', {
     name: values.name,
   });
@@ -33,7 +33,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation(
-    (values: AddCourseModalFormProps) => createCourse(values),
+    (values: CreateCourseModalFormProps) => createCourse(values),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('courses');
