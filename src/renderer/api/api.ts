@@ -1,12 +1,10 @@
 import axios from 'axios';
 import { QueryClient } from 'react-query';
+import env from '../../../env';
 
 export const queryClient = new QueryClient();
 
-const baseUrl =
-  process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3000/api'
-    : 'https://em.kevinludwig.dev';
+const baseUrl = env.production ? env.prod.apiUrl : env.dev.apiUrl;
 
 // Set config defaults when creating the instance
 const api = axios.create({
