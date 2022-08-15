@@ -7,6 +7,7 @@ import {
   createPruefungstermin,
 } from 'renderer/api/pruefungstermine';
 import Button from 'renderer/components/Ui/Button';
+import Dropdown from 'renderer/components/Ui/Dropdown';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
 import { Modules } from 'renderer/types/module';
@@ -38,7 +39,7 @@ export const CreatePruefungsterminModal: React.FC<
   }
 
   return (
-    <Modal open={open} setOpen={setOpen}>
+    <Modal open={open}>
       <Formik
         initialValues={{
           name: '',
@@ -60,29 +61,17 @@ export const CreatePruefungsterminModal: React.FC<
         }}
       >
         <Form className="space-y-6">
-          <div>
-            <label
-              htmlFor="modul"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Modul
-            </label>
-
-            <Field
-              as="select"
-              name="modul"
-              className={clsx(
-                'border-gray-300',
-                'mt-1 text-sm block font-medium w-full rounded-md text-gray-900 shadow-sm focus:border-gray-500 focus:ring-gray-500'
-              )}
-            >
-              {modules?.map((module) => (
-                <option key={module.id} value={module.id}>
-                  {module.name}
-                </option>
-              ))}
-            </Field>
-          </div>
+          <Field name="modul">
+            {({ field, meta }: FieldProps) => (
+              <Dropdown field={field} meta={meta} label="Modul">
+                {modules?.map((module) => (
+                  <option key={module.id} value={module.id}>
+                    {module.name}
+                  </option>
+                ))}
+              </Dropdown>
+            )}
+          </Field>
 
           <Field name="name">
             {({ field, meta }: FieldProps) => (
