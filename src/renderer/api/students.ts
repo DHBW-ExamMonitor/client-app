@@ -21,7 +21,13 @@ export const createStudent = async (values: CreateStudentDto) => {
 };
 
 export const updateStudent = async (values: Student) => {
-  const put = await api.put(`/studenten/${values.id}`, values);
-  const data = await put.data;
-  return data;
+  try {
+    const put = await api.put(`/studenten/${values.id}`, values);
+    const data = await put.data;
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
 };

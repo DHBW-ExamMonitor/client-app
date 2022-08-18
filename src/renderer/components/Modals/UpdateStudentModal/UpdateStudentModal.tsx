@@ -1,5 +1,6 @@
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
+import toast from 'react-hot-toast';
 import { useMutation, useQuery } from 'react-query';
 import { queryClient } from 'renderer/api/api';
 import { getCourses } from 'renderer/api/courses';
@@ -53,8 +54,12 @@ export const UpdateStudentModal: React.FC<UpdateStudentModalProps> = ({
               id: student.id,
               ...values,
             });
+            toast.success(`Student "${values.name}" erfolgreich bearbeitet.`);
           } catch (error) {
             console.log(error);
+            toast.error(
+              `Fehler beim Bearbeiten des Studenten "${values.name}".`
+            );
           } finally {
             setOpen(false);
           }

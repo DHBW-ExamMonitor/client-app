@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 export const createAndUpdateStudentFormValidationSchema = Yup.object({
   name: Yup.string()
     .min(3, 'Zu kurz!')
-    .max(20, 'Zu lang!')
+    .max(50, 'Zu lang!')
     .required('Erforderlich!'),
   matrikelnummer: Yup.string()
     .min(5, 'Zu kurz!')
