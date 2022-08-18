@@ -1,6 +1,7 @@
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useMutation } from 'react-query';
+import { queryClient } from 'renderer/api/api';
 import {
   CreateOrUpdatePruefungsterminDto,
   createPruefungstermin,
@@ -26,6 +27,9 @@ export const CreatePruefungsterminModal: React.FC<
   const { mutate } = useMutation(
     (values: CreateOrUpdatePruefungsterminDto) => createPruefungstermin(values),
     {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['pruefungstermine']);
+      },
       onError: (err) => {
         // eslint-disable-next-line no-alert
         console.log(err);

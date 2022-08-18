@@ -1,8 +1,8 @@
-import clsx from 'clsx';
 import { format } from 'date-fns';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useMutation } from 'react-query';
+import { queryClient } from 'renderer/api/api';
 import {
   CreateOrUpdatePruefungsterminDto,
   updatePruefungstermin,
@@ -31,6 +31,9 @@ export const UpdatePruefungsterminModal: React.FC<
     (values: CreateOrUpdatePruefungsterminDto) =>
       updatePruefungstermin(values, pruefungstermin.id),
     {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['pruefungstermine']);
+      },
       onError: (err) => {
         // eslint-disable-next-line no-alert
         console.log(err);
