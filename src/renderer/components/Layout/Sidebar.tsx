@@ -12,7 +12,7 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '../../../../assets/logo.png';
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
+  { name: 'Dashboard', href: '/', icon: HomeIcon },
   { name: 'Kurse', href: '/kurse', icon: UsersIcon },
   { name: 'Studierende', href: '/studenten', icon: FolderIcon },
   { name: 'Module', href: '/module', icon: CalendarIcon },
