@@ -6,6 +6,7 @@ import { createModule, CreateModuleDto } from 'renderer/api/modules';
 import Button from 'renderer/components/Ui/Button';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
+import createAndUpdateModulesFormValidationSchema from '../validation/createAndUpdateModulesFormValidationSchema';
 
 export interface CreateModuleModalProps {
   open: boolean;
@@ -19,7 +20,7 @@ export const CreateModuleModal: React.FC<CreateModuleModalProps> = ({
   open,
   setOpen,
 }) => {
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     (values: CreateModuleDto) => createModule(values),
     {
       onSuccess: () => {
@@ -39,6 +40,7 @@ export const CreateModuleModal: React.FC<CreateModuleModalProps> = ({
           name: '',
           vorlesungen: '',
         }}
+        validationSchema={createAndUpdateModulesFormValidationSchema}
         onSubmit={(values) => {
           console.log(values);
           try {
@@ -83,7 +85,9 @@ export const CreateModuleModal: React.FC<CreateModuleModalProps> = ({
             >
               Abbrechen
             </Button>
-            <Button type="submit">Erstellen</Button>
+            <Button loading={isLoading} type="submit">
+              Erstellen
+            </Button>
           </div>
         </Form>
       </Formik>

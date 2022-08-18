@@ -8,6 +8,7 @@ import CheckboxField from 'renderer/components/Ui/CheckboxField';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
 import { Module } from 'renderer/types/module';
+import createAndUpdateModulesFormValidationSchema from '../validation/createAndUpdateModulesFormValidationSchema';
 
 export interface UpdateModuleModalProps {
   open: boolean;
@@ -41,6 +42,7 @@ export const UpdateModuleModal: React.FC<UpdateModuleModalProps> = ({
           vorlesungen: module.vorlesungen ?? '',
           aktiv: module.aktiv ?? false,
         }}
+        validationSchema={createAndUpdateModulesFormValidationSchema}
         onSubmit={(values) => {
           console.log(values);
           try {

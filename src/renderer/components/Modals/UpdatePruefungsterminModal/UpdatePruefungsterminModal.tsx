@@ -13,6 +13,7 @@ import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
 import { Modules } from 'renderer/types/module';
 import { Pruefungstermin } from 'renderer/types/pruefungstermin';
+import createAndUpdatePruefungsterminFormValidationSchema from '../validation/createAndUpdatePruefungsterminFormValidationSchema';
 
 export interface UpdatePruefungsterminModalProps {
   open: boolean;
@@ -60,6 +61,7 @@ export const UpdatePruefungsterminModal: React.FC<
           ).replace(' ', 'T'),
           modul: modules[0].id,
         }}
+        validationSchema={createAndUpdatePruefungsterminFormValidationSchema}
         onSubmit={(values) => {
           try {
             mutate({

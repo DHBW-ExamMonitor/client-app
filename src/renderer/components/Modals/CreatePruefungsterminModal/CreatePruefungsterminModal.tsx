@@ -11,6 +11,7 @@ import Dropdown from 'renderer/components/Ui/Dropdown';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
 import { Modules } from 'renderer/types/module';
+import createAndUpdatePruefungsterminFormValidationSchema from '../validation/createAndUpdatePruefungsterminFormValidationSchema';
 
 export interface CreatePruefungsterminModalProps {
   open: boolean;
@@ -53,6 +54,7 @@ export const CreatePruefungsterminModal: React.FC<
           dateTime: new Date(Date.now()),
           modul: modules[0].id,
         }}
+        validationSchema={createAndUpdatePruefungsterminFormValidationSchema}
         onSubmit={(values) => {
           try {
             mutate(values);

@@ -5,6 +5,7 @@ import { createCourse, CreateCourseDto } from 'renderer/api/courses';
 import Button from 'renderer/components/Ui/Button';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
+import createAndUpdateCourseFormValidationSchema from '../validation/createAndUpdateCourseFormValidationSchema';
 
 export interface AddCourseModalProps {
   open: boolean;
@@ -20,7 +21,7 @@ export const CreateCourseModal: React.FC<AddCourseModalProps> = ({
 }) => {
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     (values: CreateCourseDto) => createCourse(values),
     {
       onSuccess: () => {
@@ -39,6 +40,7 @@ export const CreateCourseModal: React.FC<AddCourseModalProps> = ({
           name: '',
           jahrgang: new Date().getFullYear(),
         }}
+        validationSchema={createAndUpdateCourseFormValidationSchema}
         onSubmit={async (values) => {
           console.log(values);
           try {
@@ -86,7 +88,9 @@ export const CreateCourseModal: React.FC<AddCourseModalProps> = ({
             >
               Abbrechen
             </Button>
-            <Button type="submit">Erstellen</Button>
+            <Button loading={isLoading} type="submit">
+              Erstellen
+            </Button>
           </div>
         </Form>
       </Formik>
