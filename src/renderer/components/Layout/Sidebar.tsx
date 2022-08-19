@@ -1,9 +1,9 @@
 import {
+  AcademicCapIcon,
   CalendarIcon,
   ChartBarIcon,
-  FolderIcon,
   HomeIcon,
-  InboxIcon,
+  TableIcon,
   UsersIcon,
 } from '@heroicons/react/outline';
 
@@ -14,12 +14,12 @@ import logo from '../../../../assets/logo.png';
 const navigation = [
   { name: 'Dashboard', href: '/', icon: HomeIcon },
   { name: 'Kurse', href: '/kurse', icon: UsersIcon },
-  { name: 'Studierende', href: '/studenten', icon: FolderIcon },
-  { name: 'Module', href: '/module', icon: CalendarIcon },
+  { name: 'Studierende', href: '/studenten', icon: AcademicCapIcon },
+  { name: 'Module', href: '/module', icon: TableIcon },
   {
     name: 'Prüfungstermin',
     href: '/pruefungstermine',
-    icon: InboxIcon,
+    icon: CalendarIcon,
   },
   {
     name: 'Prüfungsteilnahme',
@@ -39,7 +39,7 @@ export const SideBar: React.FC = () => {
         </div>
         <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
           {navigation.map((item) => (
-            <Link to={item.href}>
+            <Link key={item.name} to={item.href}>
               <div
                 key={item.name}
                 className={clsx(

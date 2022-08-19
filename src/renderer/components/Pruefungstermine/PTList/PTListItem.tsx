@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import React, { useState } from 'react';
 import UpdatePruefungsterminModal from 'renderer/components/Modals/UpdatePruefungsterminModal';
+import ActionIcons from 'renderer/components/Ui/ActionIcons';
 import { Modules } from 'renderer/types/module';
 import { Pruefungstermin } from 'renderer/types/pruefungstermin';
 
@@ -45,13 +46,10 @@ export const PTListItem: React.FC<PTListItemProps> = ({
           {format(new Date(pruefungstermin.dateTime), 'dd.MM.yyyy HH:mm')}
         </td>
         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-          <button
-            className="text-indigo-600 hover:text-indigo-900"
-            onClick={() => setUpdateModalOpen(true)}
-          >
-            Bearbeiten
-          </button>
-          <div className="text-red-600 hover:text-red-900">Löschen</div>
+          <ActionIcons
+            editAction={() => setUpdateModalOpen(true)}
+            // deleteAction={() => setOpenWarningDialog(true)}
+          />
         </td>
       </tr>
       <UpdatePruefungsterminModal

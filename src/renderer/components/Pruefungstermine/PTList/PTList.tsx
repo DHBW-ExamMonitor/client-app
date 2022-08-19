@@ -80,12 +80,13 @@ export const PTList: React.FC<PTListProps> = ({ data, modules }) => {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
-          {data?.map((pruefungstermin) => {
-            console.log(pruefungstermin);
-            return (
-              <PTListItem pruefungstermin={pruefungstermin} modules={modules} />
-            );
-          })}
+          {data?.map((pruefungstermin) => (
+            <PTListItem
+              key={pruefungstermin.id}
+              pruefungstermin={pruefungstermin}
+              modules={modules}
+            />
+          ))}
         </tbody>
       </table>
     </div>

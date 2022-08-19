@@ -14,6 +14,7 @@ import Modal from 'renderer/components/Ui/Modal';
 import MultiselectDropdown from 'renderer/components/Ui/MultiselectDropdown';
 import { Modules } from 'renderer/types/module';
 import { MultiselectValue } from 'renderer/components/Ui/MultiselectDropdown/MultiselectDropdown';
+import createAndUpdatePruefungsterminFormValidationSchema from '../validation/createAndUpdatePruefungsterminFormValidationSchema';
 
 export interface CreatePruefungsterminModalProps {
   open: boolean;
@@ -59,6 +60,7 @@ export const CreatePruefungsterminModal: React.FC<
           modul: modules[0].id,
           kurse: [] as MultiselectValue[],
         }}
+        validationSchema={createAndUpdatePruefungsterminFormValidationSchema}
         onSubmit={(values) => {
           try {
             mutate({ ...values, kurse: values.kurse.map((a) => a.value) });

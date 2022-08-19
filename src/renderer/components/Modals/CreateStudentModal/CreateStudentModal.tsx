@@ -24,7 +24,7 @@ export const CreateStudentModal: React.FC<CreateStudentModalProps> = ({
   setOpen,
 }) => {
   const { data } = useQuery('courses', getCourses);
-  const { mutate } = useMutation(
+  const { mutate, isLoading } = useMutation(
     (values: CreateStudentDto) => createStudent(values),
     {
       onSuccess: () => {
@@ -108,10 +108,16 @@ export const CreateStudentModal: React.FC<CreateStudentModalProps> = ({
           </Field>
 
           <div className="flex mt-4 justify-end">
-            <Button className="mr-2" onClick={() => setOpen(false)}>
+            <Button
+              type="button"
+              className="mr-2"
+              onClick={() => setOpen(false)}
+            >
               Abbrechen
             </Button>
-            <Button type="submit">Erstellen</Button>
+            <Button loading={isLoading} type="submit">
+              Erstellen
+            </Button>
           </div>
         </Form>
       </Formik>

@@ -17,6 +17,7 @@ import MultiselectDropdown, {
 } from 'renderer/components/Ui/MultiselectDropdown/MultiselectDropdown';
 import { Modules } from 'renderer/types/module';
 import { Pruefungstermin } from 'renderer/types/pruefungstermin';
+import createAndUpdatePruefungsterminFormValidationSchema from '../validation/createAndUpdatePruefungsterminFormValidationSchema';
 
 export interface UpdatePruefungsterminModalProps {
   open: boolean;
@@ -69,6 +70,7 @@ export const UpdatePruefungsterminModal: React.FC<
             return { value: k.id, label: k.name };
           }),
         }}
+        validationSchema={createAndUpdatePruefungsterminFormValidationSchema}
         onSubmit={(values) => {
           try {
             mutate({
