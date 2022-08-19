@@ -7,6 +7,7 @@ import Button from 'renderer/components/Ui/Button';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
 import { Course } from 'renderer/types/course';
+import createAndUpdateCourseFormValidationSchema from '../validation/createAndUpdateCourseFormValidationSchema';
 
 export interface UpdateCourseModalProps {
   open: boolean;
@@ -24,16 +25,19 @@ export const UpdateCourseModal: React.FC<UpdateCourseModalProps> = ({
 }) => {
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation((values: Course) => updateCourse(values), {
-    onSuccess: (c) => {
-      toast.success(`Kurs "${c.name}" erfolgreich bearbeitet.`);
-      queryClient.invalidateQueries('courses');
-    },
-    onError: (err) => {
-      console.log(err);
-      toast.error('Kurs konnte nicht bearbeitet werden.');
-    },
-  });
+  const { mutate, isLoading } = useMutation(
+    (values: Course) => updateCourse(values),
+    {
+      onSuccess: (c) => {
+        toast.success(`Kurs "${c.name}" erfolgreich bearbeitet.`);
+        queryClient.invalidateQueries('courses');
+      },
+      onError: (err) => {
+        console.log(err);
+        toast.error('Kurs konnte nicht bearbeitet werden.');
+      },
+    }
+  );
 
   return (
     <Modal open={open}>
@@ -42,6 +46,7 @@ export const UpdateCourseModal: React.FC<UpdateCourseModalProps> = ({
           name: course.name ?? '',
           jahrgang: course.jahrgang ?? new Date().getFullYear(),
         }}
+        validationSchema={createAndUpdateCourseFormValidationSchema}
         onSubmit={async (values) => {
           console.log(values);
           try {
@@ -90,7 +95,9 @@ export const UpdateCourseModal: React.FC<UpdateCourseModalProps> = ({
             >
               Abbrechen
             </Button>
-            <Button type="submit">Erstellen</Button>
+            <Button loading={isLoading} type="submit">
+              Erstellen
+            </Button>
           </div>
         </Form>
       </Formik>
