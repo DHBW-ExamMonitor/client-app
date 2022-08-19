@@ -1,8 +1,9 @@
 import { format } from 'date-fns';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { queryClient } from 'renderer/api/api';
+import { getCourses } from 'renderer/api/courses';
 import {
   CreateOrUpdatePruefungsterminDto,
   updatePruefungstermin,
@@ -11,6 +12,9 @@ import Button from 'renderer/components/Ui/Button';
 import Dropdown from 'renderer/components/Ui/Dropdown';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
+import MultiselectDropdown, {
+  MultiselectValue,
+} from 'renderer/components/Ui/MultiselectDropdown/MultiselectDropdown';
 import { Modules } from 'renderer/types/module';
 import { Pruefungstermin } from 'renderer/types/pruefungstermin';
 
@@ -41,6 +45,8 @@ export const UpdatePruefungsterminModal: React.FC<
     }
   );
 
+  const courses = useQuery('courses', getCourses);
+
   if (!modules || !modules.length) {
     return null;
   }
@@ -59,11 +65,15 @@ export const UpdatePruefungsterminModal: React.FC<
             'yyyy-MM-dd HH:mm'
           ).replace(' ', 'T'),
           modul: modules[0].id,
+          kurse: pruefungstermin.kurse.map((k) => {
+            return { value: k.id, label: k.name };
+          }),
         }}
         onSubmit={(values) => {
           try {
             mutate({
               ...values,
+              kurse: values.kurse.map((k) => k.value),
               dateTime: new Date(values.dateTime),
             });
           } catch (error) {
@@ -154,6 +164,24 @@ export const UpdatePruefungsterminModal: React.FC<
                 label="Termin"
                 type="datetime-local"
                 placeholder="Termin"
+              />
+            )}
+          </Field>
+
+          <Field name="kurse">
+            {({ field, meta }: FieldProps) => (
+              <MultiselectDropdown
+                data={
+                  courses.data?.map((course) => {
+                    return {
+                      label: course.name,
+                      value: course.id,
+                    };
+                  }) as MultiselectValue[]
+                }
+                field={field}
+                meta={meta}
+                label="Kurse"
               />
             )}
           </Field>

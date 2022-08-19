@@ -15,6 +15,7 @@ export type CreateOrUpdatePruefungsterminDto = {
   notizen?: string;
   dateTime: Date;
   modul: string;
+  kurse: string[];
 };
 
 export const createPruefungstermin = async (

@@ -27,6 +27,9 @@ export const PTListItem: React.FC<PTListItemProps> = ({
           {pruefungstermin.modul.name}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          {pruefungstermin.kurse.map((kurs) => kurs.name).join(', ')}
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {pruefungstermin.hilfsmittel}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
