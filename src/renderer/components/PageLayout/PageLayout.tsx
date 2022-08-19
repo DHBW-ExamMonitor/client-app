@@ -7,6 +7,7 @@ export interface PageLayoutProps {
   children: React.ReactNode;
   buttonText: string;
   buttonAction: () => void;
+  buttonIcon?: React.ReactNode;
 }
 
 /**
@@ -18,6 +19,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
   buttonText,
   buttonAction,
   children,
+  buttonIcon,
 }) => {
   return (
     <>
@@ -29,6 +31,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
           </div>
           <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
             <Button type="button" onClick={() => buttonAction()}>
+              {buttonIcon}
               {buttonText}
             </Button>
           </div>

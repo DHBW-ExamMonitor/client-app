@@ -1,3 +1,4 @@
+import { PlusIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getStudents } from 'renderer/api/students';
@@ -20,6 +21,7 @@ export const Students: React.FC = () => {
         subTitle="Alle Studenten mit Matrikelnummer."
         buttonText="Neuer Student"
         buttonAction={() => setOpen(true)}
+        buttonIcon={<PlusIcon className="h-5 w-5 mr-2" />}
       >
         <StudentsList data={data} />
       </PageLayout>

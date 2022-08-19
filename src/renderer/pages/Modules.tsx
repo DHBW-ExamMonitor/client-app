@@ -1,3 +1,4 @@
+import { PlusIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getModules } from 'renderer/api/modules';
@@ -20,6 +21,7 @@ export const Modules: React.FC = () => {
         subTitle="Alle Module."
         buttonText="Neues Modul"
         buttonAction={() => setOpen(true)}
+        buttonIcon={<PlusIcon className="h-5 w-5 mr-2" />}
       >
         <ModulesList data={data} />
       </PageLayout>

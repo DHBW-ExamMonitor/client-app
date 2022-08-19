@@ -53,7 +53,7 @@ export const StudentsList: React.FC<StudentsListProps> = ({ data }) => {
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
           {data?.map((student) => (
-            <StudentsListItem student={student} />
+            <StudentsListItem key={student.id} student={student} />
           ))}
         </tbody>
       </table>

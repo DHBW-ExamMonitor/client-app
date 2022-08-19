@@ -70,7 +70,11 @@ export const PTList: React.FC<PTListProps> = ({ data, modules }) => {
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
           {data?.map((pruefungstermin) => (
-            <PTListItem pruefungstermin={pruefungstermin} modules={modules} />
+            <PTListItem
+              key={pruefungstermin.id}
+              pruefungstermin={pruefungstermin}
+              modules={modules}
+            />
           ))}
         </tbody>
       </table>
