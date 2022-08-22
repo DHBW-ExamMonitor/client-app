@@ -1,6 +1,5 @@
 import {
   CalendarIcon,
-  ChartBarIcon,
   FolderIcon,
   HomeIcon,
   InboxIcon,
@@ -21,11 +20,6 @@ const navigation = [
     href: '/pruefungstermine',
     icon: InboxIcon,
   },
-  {
-    name: 'Prüfungsteilnahme',
-    href: '/pruefungsteilnahmen',
-    icon: ChartBarIcon,
-  },
 ];
 
 export const SideBar: React.FC = () => {
@@ -39,7 +33,7 @@ export const SideBar: React.FC = () => {
         </div>
         <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
           {navigation.map((item) => (
-            <Link to={item.href}>
+            <Link key={item.href} to={item.href}>
               <div
                 key={item.name}
                 className={clsx(

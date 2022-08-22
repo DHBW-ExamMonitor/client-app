@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import Modules from './pages/Modules';
 import Pruefungstermine from './pages/Pruefungstermine';
 import Students from './pages/Students';
+import Teilnahmen from './pages/Teilnahmen';
 
 export default function App() {
   return (
@@ -17,10 +18,7 @@ export default function App() {
           <Route path="studenten" element={<Students />} />
           <Route path="module" element={<Modules />} />
           <Route path="pruefungstermine" element={<Pruefungstermine />} />
-          <Route
-            path="pruefungsteilnahmen"
-            element={<Dashboard pageTitle="Prüfungsteilnahme" />}
-          />
+          <Route path="teilnahmen/:id" element={<Teilnahmen />} />
         </Route>
       </Routes>
     </Router>
