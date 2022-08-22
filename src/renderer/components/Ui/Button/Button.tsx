@@ -19,7 +19,11 @@ export const Button: React.FC<
       {...props}
       disabled={loading}
       className={clsx(
-        'inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:opacity-75',
+        'inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white hover:opacity-75',
+        {
+          'bg-secondary': secondary,
+          'bg-primary': !secondary,
+        },
         className
       )}
     >

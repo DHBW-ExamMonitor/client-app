@@ -91,6 +91,7 @@ export const UpdateCourseModal: React.FC<UpdateCourseModalProps> = ({
             <Button
               type="button"
               className="mr-2"
+              secondary
               onClick={() => setOpen(false)}
             >
               Abbrechen
