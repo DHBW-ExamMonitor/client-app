@@ -1,3 +1,4 @@
+import { PlusIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getModules } from 'renderer/api/modules';
@@ -26,6 +27,7 @@ export const Modules: React.FC = () => {
         subTitle="Alle Prüfungstermine."
         buttonText="Neuer Prüfungstermin"
         buttonAction={() => setOpen(true)}
+        buttonIcon={<PlusIcon className="h-5 w-5 mr-2" />}
       >
         <PTList data={data} modules={modules.data} />
       </PageLayout>

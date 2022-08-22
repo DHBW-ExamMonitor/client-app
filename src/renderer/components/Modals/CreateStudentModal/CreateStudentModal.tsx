@@ -108,7 +108,11 @@ export const CreateStudentModal: React.FC<CreateStudentModalProps> = ({
           </Field>
 
           <div className="flex mt-4 justify-end">
-            <Button className="mr-2" onClick={() => setOpen(false)}>
+            <Button
+              type="button"
+              className="mr-2"
+              onClick={() => setOpen(false)}
+            >
               Abbrechen
             </Button>
             <Button loading={isLoading} type="submit">

@@ -1,3 +1,4 @@
+import { PlusIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { getCourses } from 'renderer/api/courses';
@@ -19,6 +20,7 @@ export const Courses: React.FC = () => {
         subTitle="Alle Kurse in der Übersicht."
         buttonText="Neuer Kurs"
         buttonAction={() => setOpen(true)}
+        buttonIcon={<PlusIcon className="h-5 w-5 mr-2" />}
       >
         <CoursesList data={data} />
       </PageLayout>

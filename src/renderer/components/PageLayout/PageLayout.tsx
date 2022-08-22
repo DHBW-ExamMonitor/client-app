@@ -8,6 +8,7 @@ export interface PageLayoutProps {
   children: React.ReactNode;
   buttonText?: string;
   buttonAction?: () => void;
+  buttonIcon?: React.ReactNode;
   hideButton?: boolean;
   navigateBackTo?: string;
 }
@@ -21,6 +22,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
   buttonText,
   buttonAction,
   children,
+  buttonIcon,
   hideButton,
   navigateBackTo,
 }) => {
@@ -45,6 +47,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
           {!hideButton && buttonAction && (
             <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
               <Button type="button" onClick={() => buttonAction()}>
+                {buttonIcon}
                 {buttonText}
               </Button>
             </div>

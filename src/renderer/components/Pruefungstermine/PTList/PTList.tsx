@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Modules } from 'renderer/types/module';
 import { Pruefungstermine } from 'renderer/types/pruefungstermin';
 import PTListItem from './PTListItem';
@@ -8,6 +9,10 @@ type PTListProps = {
 };
 
 export const PTList: React.FC<PTListProps> = ({ data, modules }) => {
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   if (!data || !data.length)
     return (
       <div>
@@ -31,6 +36,12 @@ export const PTList: React.FC<PTListProps> = ({ data, modules }) => {
               className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
             >
               Modul
+            </th>
+            <th
+              scope="col"
+              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+            >
+              Kurse
             </th>
             <th
               scope="col"

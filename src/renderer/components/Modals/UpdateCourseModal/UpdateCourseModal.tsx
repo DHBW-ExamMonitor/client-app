@@ -1,6 +1,6 @@
-import { is } from 'date-fns/locale';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
+import toast from 'react-hot-toast';
 import { useMutation, useQueryClient } from 'react-query';
 import { updateCourse } from 'renderer/api/courses';
 import Button from 'renderer/components/Ui/Button';
@@ -28,11 +28,13 @@ export const UpdateCourseModal: React.FC<UpdateCourseModalProps> = ({
   const { mutate, isLoading } = useMutation(
     (values: Course) => updateCourse(values),
     {
-      onSuccess: () => {
+      onSuccess: (c) => {
+        toast.success(`Kurs "${c.name}" erfolgreich bearbeitet.`);
         queryClient.invalidateQueries('courses');
       },
       onError: (err) => {
         console.log(err);
+        toast.error('Kurs konnte nicht bearbeitet werden.');
       },
     }
   );

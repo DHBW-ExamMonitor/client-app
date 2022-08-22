@@ -1,5 +1,10 @@
 import React from 'react';
+import toast from 'react-hot-toast';
+import { queryClient } from 'renderer/api/api';
+import { deleteCourse } from 'renderer/api/courses';
 import UpdateCourseModal from 'renderer/components/Modals/UpdateCourseModal';
+import ActionIcons from 'renderer/components/Ui/ActionIcons';
+import WarningDialog from 'renderer/components/Ui/WarningDialog';
 import { Course } from 'renderer/types/course';
 
 export interface CoursesListItemProps {
@@ -12,12 +17,33 @@ export interface CoursesListItemProps {
 export const CoursesListItem: React.FC<CoursesListItemProps> = ({ course }) => {
   const [openUpdateCourseModal, setOpenUpdateCourseModal] =
     React.useState(false);
+  const [openWarningDialog, setOpenWarningDialog] = React.useState(false);
+
   return (
     <>
       <UpdateCourseModal
         course={course}
         open={openUpdateCourseModal}
         setOpen={setOpenUpdateCourseModal}
+      />
+      <WarningDialog
+        open={openWarningDialog}
+        setOpen={setOpenWarningDialog}
+        title={`Kurs "${course.name}" wirklich löschen?`}
+        message="Beim Löschen eines Kurses werden alle zugehörigen Studierenden inklusive ihrer Prüfungsteilnahmen und den zugehörigen Terminen gelöscht. Sind Sie sicher?"
+        action={async () => {
+          try {
+            await deleteCourse(course.id);
+            toast.success(`Kurs "${course.name}" erfolgreich gelöscht.`);
+          } catch (error) {
+            console.error(error);
+            toast.error('Kurs konnte nicht gelöscht werden.');
+          } finally {
+            setOpenWarningDialog(false);
+            queryClient.invalidateQueries('courses');
+          }
+        }}
+        actionText="Löschen"
       />
       <tr>
         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
@@ -26,21 +52,11 @@ export const CoursesListItem: React.FC<CoursesListItemProps> = ({ course }) => {
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {course.jahrgang}
         </td>
-        {/*
-      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-      {course.studentenStatus}
-      </td>
-      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-      {course?.name}
-    </td> */}
         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-          <button
-            className="text-indigo-600 hover:text-indigo-900"
-            onClick={() => setOpenUpdateCourseModal(true)}
-          >
-            Bearbeiten
-          </button>
-          <div className="text-red-600 hover:text-red-900">Löschen</div>
+          <ActionIcons
+            editAction={() => setOpenUpdateCourseModal(true)}
+            deleteAction={() => setOpenWarningDialog(true)}
+          />
         </td>
       </tr>
     </>

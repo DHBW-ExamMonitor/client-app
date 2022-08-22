@@ -4,6 +4,7 @@ import React from 'react';
 export interface ButtonProps {
   children?: React.ReactNode;
   className?: string;
+  secondary?: boolean;
   loading?: boolean;
 }
 
@@ -12,7 +13,7 @@ export interface ButtonProps {
  */
 export const Button: React.FC<
   ButtonProps & JSX.IntrinsicElements['button']
-> = ({ children, className, loading, ...props }) => {
+> = ({ children, className, secondary, loading, ...props }) => {
   return (
     <button
       {...props}
