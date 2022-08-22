@@ -86,7 +86,7 @@ export const UpdateModuleModal: React.FC<UpdateModuleModalProps> = ({
           </Field>
 
           <div className="flex mt-4 justify-end">
-            <Button className="mr-2" onClick={() => setOpen(false)}>
+            <Button className="mr-2" secondary onClick={() => setOpen(false)}>
               Abbrechen
             </Button>
             <Button type="submit">Erstellen</Button>
