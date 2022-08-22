@@ -84,6 +84,24 @@ export const CreatePruefungsterminModal: React.FC<
             )}
           </Field>
 
+          <Field name="kurse">
+            {({ field, meta }: FieldProps) => (
+              <MultiselectDropdown
+                data={
+                  courses.data?.map((course) => {
+                    return {
+                      label: course.name,
+                      value: course.id,
+                    };
+                  }) as MultiselectValue[]
+                }
+                field={field}
+                meta={meta}
+                label="Kurse"
+              />
+            )}
+          </Field>
+
           <Field name="name">
             {({ field, meta }: FieldProps) => (
               <InputField
@@ -152,24 +170,6 @@ export const CreatePruefungsterminModal: React.FC<
                 label="Termin"
                 type="datetime-local"
                 placeholder="Termin"
-              />
-            )}
-          </Field>
-
-          <Field name="kurse">
-            {({ field, meta }: FieldProps) => (
-              <MultiselectDropdown
-                data={
-                  courses.data?.map((course) => {
-                    return {
-                      label: course.name,
-                      value: course.id,
-                    };
-                  }) as MultiselectValue[]
-                }
-                field={field}
-                meta={meta}
-                label="Kurse"
               />
             )}
           </Field>

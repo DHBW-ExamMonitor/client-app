@@ -1,8 +1,19 @@
-import { Pruefungstermine } from 'renderer/types/pruefungstermin';
+import {
+  Pruefungstermin,
+  Pruefungstermine,
+} from 'renderer/types/pruefungstermin';
 import api from './api';
 
 export const getPruefungstermine = async (): Promise<Pruefungstermine> => {
   const get = await api.get('/pruefungstermine');
+  const data = await get.data;
+  return data;
+};
+
+export const getPruefungstermin = async (
+  id: string
+): Promise<Pruefungstermin> => {
+  const get = await api.get(`/pruefungstermine/${id}`);
   const data = await get.data;
   return data;
 };
