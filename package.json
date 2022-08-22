@@ -211,6 +211,7 @@
     "react-hot-toast": "^2.3.0",
     "react-query": "^3.39.1",
     "react-router-dom": "^6.2.1",
+    "react-spinners": "^0.13.4",
     "yup": "^0.32.11"
   },
   "devEngines": {
