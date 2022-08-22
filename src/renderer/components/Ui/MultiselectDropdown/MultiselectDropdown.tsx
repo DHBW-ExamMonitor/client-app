@@ -29,32 +29,32 @@ export const MultiselectDropdown: React.FC<MultiselectDropdownProps> = ({
 
   return (
     <>
-      {data && data.length && (
-        <Listbox
-          value={field.value}
-          onChange={(e) => {
-            const v: MultiselectValue[] = field.value;
+      <Listbox
+        value={field.value}
+        onChange={(e) => {
+          const v: MultiselectValue[] = field.value;
 
-            if (!v.some((a) => a.value === e.value)) {
-              v.push(e);
-            } else {
-              const index = v.findIndex((a) => a.value === e.value);
-              v.splice(index, 1);
-            }
-            form.setFieldValue(field.name, v);
-          }}
-        >
-          {({ open }) => (
-            <>
-              <Listbox.Label
-                className={clsx(
-                  'block text-sm font-medium ',
-                  meta.touched && meta.error ? 'text-red-800' : 'text-gray-700'
-                )}
-              >
-                {label}
-              </Listbox.Label>
-              <div className="mt-1 relative">
+          if (!v.some((a) => a.value === e.value)) {
+            v.push(e);
+          } else {
+            const index = v.findIndex((a) => a.value === e.value);
+            v.splice(index, 1);
+          }
+          form.setFieldValue(field.name, v);
+        }}
+      >
+        {({ open }) => (
+          <div>
+            <Listbox.Label
+              className={clsx(
+                'block text-sm font-medium ',
+                meta.touched && meta.error ? 'text-red-800' : 'text-gray-700'
+              )}
+            >
+              {label}
+            </Listbox.Label>
+            {data && data.length ? (
+              <div className="relative">
                 <Listbox.Button
                   className={clsx(
                     'bg-white relative w-full border rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 sm:text-sm',
@@ -136,10 +136,15 @@ export const MultiselectDropdown: React.FC<MultiselectDropdownProps> = ({
                   </Listbox.Options>
                 </Transition>
               </div>
-            </>
-          )}
-        </Listbox>
-      )}
+            ) : (
+              <div className="block text-sm font-medium text-primary">
+                Keine Kurse vorhanden.
+              </div>
+            )}
+          </div>
+        )}
+      </Listbox>
+
       {meta.touched && meta.error && (
         <p className="mt-1 block text-xs font-medium text-red-800">
           {meta.error}
