@@ -33,7 +33,7 @@ export const SideBar: React.FC = () => {
         </div>
         <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
           {navigation.map((item) => (
-            <Link key={item.name} key={item.href} to={item.href}>
+            <Link key={item.name} to={item.href}>
               <div
                 key={item.name}
                 className={clsx(
