@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
@@ -38,7 +39,7 @@ export const CreateCourseModal: React.FC<AddCourseModalProps> = ({
       <Formik
         initialValues={{
           name: '',
-          jahrgang: new Date().getFullYear(),
+          studienende: format(new Date(Date.now()), 'yyyy-MM-dd'),
         }}
         validationSchema={createAndUpdateCourseFormValidationSchema}
         onSubmit={async (values) => {
@@ -46,7 +47,7 @@ export const CreateCourseModal: React.FC<AddCourseModalProps> = ({
           try {
             mutate({
               name: values.name,
-              jahrgang: values.jahrgang.toString(),
+              studienende: new Date(values.studienende),
             });
           } catch (error) {
             console.log(error);
@@ -68,14 +69,14 @@ export const CreateCourseModal: React.FC<AddCourseModalProps> = ({
             )}
           </Field>
 
-          <Field name="jahrgang">
+          <Field name="studienende">
             {({ field, meta }: FieldProps) => (
               <InputField
                 field={field}
                 meta={meta}
-                label="Jahrgang"
-                type="number"
-                placeholder="Jahrgang"
+                label="Studienende"
+                type="date"
+                placeholder="Studienende"
               />
             )}
           </Field>

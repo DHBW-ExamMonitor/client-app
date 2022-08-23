@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
 import toast from 'react-hot-toast';
@@ -44,7 +45,7 @@ export const UpdateCourseModal: React.FC<UpdateCourseModalProps> = ({
       <Formik
         initialValues={{
           name: course.name ?? '',
-          jahrgang: course.jahrgang ?? new Date().getFullYear(),
+          studienende: format(new Date(course.studienende), 'yyyy-MM-dd'),
         }}
         validationSchema={createAndUpdateCourseFormValidationSchema}
         onSubmit={async (values) => {
@@ -53,7 +54,7 @@ export const UpdateCourseModal: React.FC<UpdateCourseModalProps> = ({
             mutate({
               id: course.id,
               name: values.name,
-              jahrgang: values.jahrgang.toString(),
+              studienende: values.studienende,
             });
           } catch (error) {
             console.log(error);
@@ -75,14 +76,14 @@ export const UpdateCourseModal: React.FC<UpdateCourseModalProps> = ({
             )}
           </Field>
 
-          <Field name="jahrgang">
+          <Field name="studienende">
             {({ field, meta }: FieldProps) => (
               <InputField
                 field={field}
                 meta={meta}
-                label="Jahrgang"
-                type="number"
-                placeholder="Jahrgang"
+                label="Studienende"
+                type="date"
+                placeholder="Studienende"
               />
             )}
           </Field>
