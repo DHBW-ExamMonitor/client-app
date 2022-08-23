@@ -2,12 +2,15 @@ import {
   AcademicCapIcon,
   CalendarIcon,
   HomeIcon,
+  InformationCircleIcon,
   TableIcon,
   UsersIcon,
 } from '@heroicons/react/outline';
 
 import clsx from 'clsx';
+import { useQuery } from 'react-query';
 import { Link, useLocation } from 'react-router-dom';
+import getStatus from 'renderer/api/status';
 import logo from '../../../../assets/logo.png';
 
 const navigation = [
@@ -24,6 +27,8 @@ const navigation = [
 
 export const SideBar: React.FC = () => {
   const location = useLocation();
+
+  const { isSuccess } = useQuery('status', getStatus);
 
   return (
     <div className="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white">
@@ -57,6 +62,15 @@ export const SideBar: React.FC = () => {
             </Link>
           ))}
         </nav>
+      </div>
+      <div className="px-5 pb-5 flex items-center text-gray-600 text-sm font-medium">
+        <InformationCircleIcon className="mr-3 flex-shrink-0 h-6 w-6 text-gray-500" />
+        Serverstatus:
+        {isSuccess ? (
+          <div className="ml-2 h-2 w-2 bg-green-500 rounded-full" />
+        ) : (
+          <div className="ml-2 h-2 w-2 bg-red-500 rounded-full" />
+        )}
       </div>
     </div>
   );
