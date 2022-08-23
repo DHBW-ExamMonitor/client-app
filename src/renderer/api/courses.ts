@@ -9,7 +9,7 @@ export const getCourses = async (): Promise<Courses> => {
 
 export type CreateCourseDto = {
   name: string;
-  jahrgang: string;
+  studienende: Date;
 };
 
 export const createCourse = async (course: CreateCourseDto) => {

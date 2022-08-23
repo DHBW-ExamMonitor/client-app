@@ -14,6 +14,7 @@ import Modal from 'renderer/components/Ui/Modal';
 import MultiselectDropdown from 'renderer/components/Ui/MultiselectDropdown';
 import { Modules } from 'renderer/types/module';
 import { MultiselectValue } from 'renderer/components/Ui/MultiselectDropdown/MultiselectDropdown';
+import { format } from 'date-fns';
 import createAndUpdatePruefungsterminFormValidationSchema from '../validation/createAndUpdatePruefungsterminFormValidationSchema';
 
 export interface CreatePruefungsterminModalProps {
@@ -56,14 +57,21 @@ export const CreatePruefungsterminModal: React.FC<
           raeume: '',
           aufsichtsPersonen: '',
           notizen: '',
-          dateTime: new Date(Date.now()),
+          dateTime: format(new Date(Date.now()), 'yyyy-MM-dd HH:mm').replace(
+            ' ',
+            'T'
+          ),
           modul: modules[0].id,
           kurse: [] as MultiselectValue[],
         }}
         validationSchema={createAndUpdatePruefungsterminFormValidationSchema}
         onSubmit={(values) => {
           try {
-            mutate({ ...values, kurse: values.kurse.map((a) => a.value) });
+            mutate({
+              ...values,
+              kurse: values.kurse.map((a) => a.value),
+              dateTime: new Date(values.dateTime),
+            });
           } catch (error) {
             console.log(error);
           } finally {
@@ -75,11 +83,13 @@ export const CreatePruefungsterminModal: React.FC<
           <Field name="modul">
             {({ field, meta }: FieldProps) => (
               <Dropdown field={field} meta={meta} label="Modul">
-                {modules?.map((module) => (
-                  <option key={module.id} value={module.id}>
-                    {module.name}
-                  </option>
-                ))}
+                {modules
+                  ?.filter((m) => m.aktiv)
+                  .map((module) => (
+                    <option key={module.id} value={module.id}>
+                      {module.name}
+                    </option>
+                  ))}
               </Dropdown>
             )}
           </Field>

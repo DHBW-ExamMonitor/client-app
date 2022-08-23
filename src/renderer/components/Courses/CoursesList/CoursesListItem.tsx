@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import React from 'react';
 import toast from 'react-hot-toast';
 import { queryClient } from 'renderer/api/api';
@@ -50,7 +51,7 @@ export const CoursesListItem: React.FC<CoursesListItemProps> = ({ course }) => {
           {course.name}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {course.jahrgang}
+          {format(new Date(course.studienende), 'dd.MM.yyyy')}
         </td>
         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
           <ActionIcons
