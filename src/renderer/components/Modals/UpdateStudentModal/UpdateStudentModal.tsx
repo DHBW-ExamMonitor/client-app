@@ -124,7 +124,7 @@ export const UpdateStudentModal: React.FC<UpdateStudentModalProps> = ({
             >
               Abbrechen
             </Button>
-            <Button type="submit">Erstellen</Button>
+            <Button type="submit">Aktualisieren</Button>
           </div>
         </Form>
       </Formik>
