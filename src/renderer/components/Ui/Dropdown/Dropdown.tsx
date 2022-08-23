@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Field, FieldProps } from 'formik';
+import { FieldProps } from 'formik';
 import React from 'react';
 
 export interface DropdownProps {
@@ -14,14 +14,9 @@ export interface DropdownProps {
 /**
  * Dropdown Component
  */
-export const Dropdown: React.FC<DropdownProps> = ({
-  children,
-  className,
-  field,
-  meta,
-  label,
-  optional,
-}) => {
+export const Dropdown: React.FC<
+  DropdownProps & JSX.IntrinsicElements['select']
+> = ({ children, className, field, meta, label, optional, ...props }) => {
   return (
     <div className={className}>
       {optional ? (
@@ -58,16 +53,16 @@ export const Dropdown: React.FC<DropdownProps> = ({
         </label>
       )}
 
-      <Field
-        as="select"
-        name={field.name}
+      <select
+        {...field}
+        {...props}
         className={clsx(
           'border-gray-300',
           'mt-1 text-sm block font-medium w-full rounded-md text-gray-900 shadow-sm focus:border-gray-500 focus:ring-gray-500'
         )}
       >
         {children}
-      </Field>
+      </select>
       {meta.touched && meta.error ? (
         <p className="mt-1 block text-xs font-medium text-red-500">
           {meta.error}
