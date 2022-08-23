@@ -9,7 +9,11 @@ import {
 import Button from 'renderer/components/Ui/Button';
 import Dropdown from 'renderer/components/Ui/Dropdown';
 import Modal from 'renderer/components/Ui/Modal';
-import { Pruefungsteilnahme, Versuch } from 'renderer/types/pruefungsteilnahme';
+import {
+  Pruefungsteilnahme,
+  TeilnahmeStatus,
+  Versuch,
+} from 'renderer/types/pruefungsteilnahme';
 
 export interface UpdatePruefungsterminModalProps {
   open: boolean;
@@ -45,6 +49,8 @@ export const UpdatePruefungsteilnahmeModal: React.FC<
           versuch: teilnahme.versuch.toString(),
           studentId: teilnahme.studentId,
           pruefungsterminId: teilnahme.pruefungsterminId,
+          pruefungsteilnahmeStatus:
+            teilnahme.pruefungsteilnahmeStatus.toString(),
         }}
         onSubmit={(values) => {
           try {
@@ -63,6 +69,20 @@ export const UpdatePruefungsteilnahmeModal: React.FC<
             {({ field, meta }: FieldProps) => (
               <Dropdown field={field} meta={meta} label="Versuch">
                 {Object.values(Versuch)
+                  .filter((v) => typeof v === 'string')
+                  .map((v) => (
+                    <option key={v} value={v}>
+                      {v}
+                    </option>
+                  ))}
+              </Dropdown>
+            )}
+          </Field>
+
+          <Field name="pruefungsteilnahmeStatus">
+            {({ field, meta }: FieldProps) => (
+              <Dropdown field={field} meta={meta} label="Teilnahmestatus">
+                {Object.values(TeilnahmeStatus)
                   .filter((v) => typeof v === 'string')
                   .map((v) => (
                     <option key={v} value={v}>

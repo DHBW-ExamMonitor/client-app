@@ -1,4 +1,4 @@
-export const enum TeilnahmeStatus {
+export enum TeilnahmeStatus {
   BESTANDEN,
   NICHT_BESTANDEN,
   ANGERECHNET,

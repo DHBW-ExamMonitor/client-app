@@ -32,7 +32,16 @@ export const Teilnahme: React.FC<TeilnahmeProps> = ({
             </>
           )}
         </div>
-        {!teilnahme ? (
+        <div className="w-48 mr-8">
+          {teilnahme ? (
+            <>{teilnahme.pruefungsteilnahmeStatus}</>
+          ) : (
+            <>
+              <div>Kein Status</div>
+            </>
+          )}
+        </div>
+        {!teilnahme?.versuch ? (
           <Button className="mr-8" type="button" onClick={() => setAdd(true)}>
             Hinzufügen
           </Button>

@@ -46,6 +46,7 @@ export const Kursliste: React.FC<KurslisteProps> = ({
           versuch: 'ERSTVERSUCH',
           studentId: student.id,
           pruefungsterminId: terminId,
+          pruefungsteilnahmeStatus: 'BESTANDEN',
         });
       });
     }
