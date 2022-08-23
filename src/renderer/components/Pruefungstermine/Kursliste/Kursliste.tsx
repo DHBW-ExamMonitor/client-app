@@ -41,14 +41,16 @@ export const Kursliste: React.FC<KurslisteProps> = ({
 
   const addAllStudents = async () => {
     if (data) {
-      data.forEach((student) => {
-        mutate({
-          versuch: 'ERSTVERSUCH',
-          studentId: student.id,
-          pruefungsterminId: terminId,
-          pruefungsteilnahmeStatus: 'BESTANDEN',
+      data
+        .filter((s) => s.studentenStatus !== 'EXMATRIKULIERT')
+        .forEach((student) => {
+          mutate({
+            versuch: 'ERSTVERSUCH',
+            studentId: student.id,
+            pruefungsterminId: terminId,
+            pruefungsteilnahmeStatus: 'BESTANDEN',
+          });
         });
-      });
     }
   };
 

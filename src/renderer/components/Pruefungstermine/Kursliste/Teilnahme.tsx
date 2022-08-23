@@ -41,15 +41,35 @@ export const Teilnahme: React.FC<TeilnahmeProps> = ({
             </>
           )}
         </div>
-        {!teilnahme?.versuch ? (
-          <Button className="mr-8" type="button" onClick={() => setAdd(true)}>
-            Hinzufügen
-          </Button>
-        ) : (
-          <ActionIcons
-            editAction={() => setEdit(true)}
-            // deleteAction={() => setOpenWarningDialog(true)}
-          />
+        {student.studentenStatus !== 'EXMATRIKULIERT' && (
+          <>
+            {!teilnahme?.versuch ? (
+              <Button
+                className="mr-8"
+                type="button"
+                onClick={() => setAdd(true)}
+              >
+                Hinzufügen
+              </Button>
+            ) : (
+              <ActionIcons
+                editAction={() => setEdit(true)}
+                // deleteAction={() => setOpenWarningDialog(true)}
+              />
+            )}
+          </>
+        )}
+        {student.studentenStatus === 'EXMATRIKULIERT' && (
+          <>
+            <Button
+              className="mr-8 hover:cursor-default"
+              type="button"
+              secondary
+              disabled
+            >
+              exmatrikuliert
+            </Button>
+          </>
         )}
       </div>
       <CreatePruefungsteilnahmeModal
