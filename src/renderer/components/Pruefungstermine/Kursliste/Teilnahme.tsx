@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import CreatePruefungsteilnahmeModal from 'renderer/components/Modals/CreatePruefungsteilnahmeModal';
+import UpdatePruefungsteilnahmeModal from 'renderer/components/Modals/UpdatePruefungsteilnahmeModal';
 import ActionIcons from 'renderer/components/Ui/ActionIcons';
 import Button from 'renderer/components/Ui/Button';
 import { Pruefungsteilnahme } from 'renderer/types/pruefungsteilnahme';
@@ -16,7 +17,7 @@ export const Teilnahme: React.FC<TeilnahmeProps> = ({
   teilnahme,
   terminId,
 }) => {
-  // const [edit, setEdit] = useState<boolean>(false);
+  const [edit, setEdit] = useState<boolean>(false);
   const [add, setAdd] = useState<boolean>(false);
   return (
     <>
@@ -37,8 +38,8 @@ export const Teilnahme: React.FC<TeilnahmeProps> = ({
           </Button>
         ) : (
           <ActionIcons
-          // editAction={() => setEdit(true)}
-          // deleteAction={() => setOpenWarningDialog(true)}
+            editAction={() => setEdit(true)}
+            // deleteAction={() => setOpenWarningDialog(true)}
           />
         )}
       </div>
@@ -48,6 +49,13 @@ export const Teilnahme: React.FC<TeilnahmeProps> = ({
         student={student}
         terminId={terminId}
       />
+      {teilnahme && (
+        <UpdatePruefungsteilnahmeModal
+          open={edit}
+          setOpen={setEdit}
+          teilnahme={teilnahme}
+        />
+      )}
     </>
   );
 };

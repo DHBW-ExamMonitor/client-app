@@ -28,9 +28,7 @@ export const Termininfo: React.FC<TermininfoProps> = ({ termin }) => {
           <div>{termin?.modul.name}</div>
           <div>
             {termin?.kurse.length
-              ? termin.kurse.map((kurs) => (
-                  <span key={kurs.id}>{kurs.name}</span>
-                ))
+              ? termin?.kurse.map((kurs) => kurs.name).join(', ')
               : '-'}
           </div>
           <div>{termin?.hilfsmittel?.length ? termin?.hilfsmittel : '-'}</div>
