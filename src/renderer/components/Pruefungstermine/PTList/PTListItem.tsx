@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import CopyPruefungsterminModal from 'renderer/components/Modals/CopyPruefungsterminModal';
 import UpdatePruefungsterminModal from 'renderer/components/Modals/UpdatePruefungsterminModal';
 import ActionIcons from 'renderer/components/Ui/ActionIcons';
 import Button from 'renderer/components/Ui/Button';
@@ -19,7 +20,8 @@ export const PTListItem: React.FC<PTListItemProps> = ({
   pruefungstermin,
   modules,
 }) => {
-  const [updateModalOpen, setUpdateModalOpen] = useState(false);
+  const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
+  const [copyModalOpen, setCopyModalOpen] = useState<boolean>(false);
   return (
     <>
       <tr>
@@ -51,7 +53,9 @@ export const PTListItem: React.FC<PTListItemProps> = ({
         </td>
         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
           <ActionIcons
+            copyButton
             editAction={() => setUpdateModalOpen(true)}
+            copyAction={() => setCopyModalOpen(true)}
             // deleteAction={() => setOpenWarningDialog(true)}
           />
         </td>
@@ -61,6 +65,11 @@ export const PTListItem: React.FC<PTListItemProps> = ({
         setOpen={setUpdateModalOpen}
         modules={modules}
         pruefungstermin={pruefungstermin}
+      />
+      <CopyPruefungsterminModal
+        open={copyModalOpen}
+        setOpen={setCopyModalOpen}
+        termin={pruefungstermin}
       />
     </>
   );

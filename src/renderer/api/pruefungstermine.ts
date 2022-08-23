@@ -1,8 +1,12 @@
+import { Pruefungsteilnahme } from 'renderer/types/pruefungsteilnahme';
 import {
   Pruefungstermin,
   Pruefungstermine,
 } from 'renderer/types/pruefungstermin';
 import api from './api';
+import getPruefungsteilnahme, {
+  createPruefungsteilnahme,
+} from './pruefungsteilnahme';
 
 export const getPruefungstermine = async (): Promise<Pruefungstermine> => {
   const get = await api.get('/pruefungstermine');
@@ -39,6 +43,27 @@ export const createPruefungstermin = async (
   return data;
 };
 
+export const createPruefungsterminWithStudents = async (
+  dto: CreateOrUpdatePruefungsterminDto,
+  termin: Pruefungstermin
+) => {
+  const post = await createPruefungstermin(dto);
+  const get = await getPruefungsteilnahme(termin.id);
+
+  get.forEach(async (pruefungsteilnahme: Pruefungsteilnahme) => {
+    if (
+      pruefungsteilnahme.pruefungsteilnahmeStatus.toString() !== 'BESTANDEN'
+    ) {
+      await createPruefungsteilnahme({
+        pruefungsterminId: post.id,
+        studentId: pruefungsteilnahme.studentId,
+        versuch: pruefungsteilnahme.versuch.toString(),
+        pruefungsteilnahmeStatus:
+          pruefungsteilnahme.pruefungsteilnahmeStatus.toString(),
+      });
+    }
+  });
+};
 export const updatePruefungstermin = async (
   values: CreateOrUpdatePruefungsterminDto,
   id: string
