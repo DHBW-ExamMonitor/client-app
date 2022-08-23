@@ -1,5 +1,5 @@
 import { Course } from './course';
-import { ExamAttendance } from './examAttendance';
+import { Pruefungsteilnahme } from './pruefungsteilnahme';
 import { Module } from './module';
 
 export type Pruefungstermin = {
@@ -12,7 +12,7 @@ export type Pruefungstermin = {
   notizen: string;
   dateTime: Date;
   kurse: Course[];
-  pruefungsteilnahmen: ExamAttendance[];
+  pruefungsteilnahmen: Pruefungsteilnahme[];
 };
 
 export type Pruefungstermine = Pruefungstermin[];

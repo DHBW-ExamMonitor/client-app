@@ -7,6 +7,12 @@ export const getStudents = async (): Promise<Students> => {
   return data;
 };
 
+export const getStudentsByCourse = async (id: string): Promise<Students> => {
+  const get = await api.get(`/studenten/kurs/${id}`);
+  const data = await get.data;
+  return data;
+};
+
 export type CreateStudentDto = {
   name: string;
   matrikelnummer: string;
