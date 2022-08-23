@@ -23,12 +23,7 @@ export const Teilnahmen: React.FC = () => {
 
   return (
     <>
-      <PageLayout
-        title="Teilnahmen"
-        subTitle=""
-        hideButton
-        navigateBackTo="/pruefungstermine"
-      >
+      <PageLayout title="Teilnahmen" subTitle="" hideButton navigateBack>
         <Termininfo termin={data} />
         {data?.kurse.map((kurs) => (
           <Kursliste

@@ -10,6 +10,7 @@ import { Pruefungstermin } from 'renderer/types/pruefungstermin';
 export interface PTListItemProps {
   pruefungstermin: Pruefungstermin;
   modules?: Modules;
+  disableActions?: boolean;
 }
 
 /**
@@ -18,6 +19,7 @@ export interface PTListItemProps {
 export const PTListItem: React.FC<PTListItemProps> = ({
   pruefungstermin,
   modules,
+  disableActions,
 }) => {
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   return (
@@ -49,12 +51,14 @@ export const PTListItem: React.FC<PTListItemProps> = ({
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {format(new Date(pruefungstermin.dateTime), 'dd.MM.yyyy HH:mm')}
         </td>
-        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-          <ActionIcons
-            editAction={() => setUpdateModalOpen(true)}
-            // deleteAction={() => setOpenWarningDialog(true)}
-          />
-        </td>
+        {!disableActions && (
+          <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+            <ActionIcons
+              editAction={() => setUpdateModalOpen(true)}
+              // deleteAction={() => setOpenWarningDialog(true)}
+            />
+          </td>
+        )}
       </tr>
       <UpdatePruefungsterminModal
         open={updateModalOpen}

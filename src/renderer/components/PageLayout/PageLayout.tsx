@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Ui/Button';
 
 export interface PageLayoutProps {
@@ -10,7 +10,7 @@ export interface PageLayoutProps {
   buttonAction?: () => void;
   buttonIcon?: React.ReactNode;
   hideButton?: boolean;
-  navigateBackTo?: string;
+  navigateBack?: boolean;
 }
 
 /**
@@ -24,18 +24,22 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
   children,
   buttonIcon,
   hideButton,
-  navigateBackTo,
+  navigateBack,
 }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
-          {navigateBackTo && (
-            <Link to={navigateBackTo}>
-              <Button type="button" className="mr-4" secondary>
-                Zurück
-              </Button>
-            </Link>
+          {navigateBack && (
+            <Button
+              type="button"
+              className="mr-4"
+              secondary
+              onClick={() => navigate(-1)}
+            >
+              Zurück
+            </Button>
           )}
           <div className="sm:flex-auto">
             <h1 className="text-xl font-semibold text-gray-900">{title}</h1>
