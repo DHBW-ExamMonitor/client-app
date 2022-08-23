@@ -54,11 +54,11 @@ export const Kursliste: React.FC<KurslisteProps> = ({
   return (
     <div className="mb-16">
       <div className="flex flex-row items-center">
-        <div className="w-28 mr-8 text-xl font-semibold text-gray-900">
+        <div className="w-48 mr-8 text-xl font-semibold text-gray-900">
           {kurs.name}
         </div>
         <Button type="button" onClick={addAllStudents}>
-          Alle Studenten des Kurses hinzufügen
+          Alle hinzufügen
         </Button>
       </div>
 

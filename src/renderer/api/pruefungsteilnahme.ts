@@ -25,4 +25,13 @@ export const createPruefungsteilnahme = async (
   return data;
 };
 
+export const updatePruefungsteilnahme = async (
+  dto: CreateOrUpdatePruefungsteilnahmeDto,
+  id: string
+) => {
+  const put = await api.put(`/pruefungsteilnahme/${id}`, dto);
+  const data = await put.data;
+  return data;
+};
+
 export default getPruefungsteilnahme;
