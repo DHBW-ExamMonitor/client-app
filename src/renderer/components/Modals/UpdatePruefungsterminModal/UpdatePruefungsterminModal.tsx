@@ -197,7 +197,7 @@ export const UpdatePruefungsterminModal: React.FC<
             >
               Abbrechen
             </Button>
-            <Button type="submit">Erstellen</Button>
+            <Button type="submit">Aktualisieren</Button>
           </div>
         </Form>
       </Formik>

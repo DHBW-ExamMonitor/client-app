@@ -89,7 +89,7 @@ export const UpdateModuleModal: React.FC<UpdateModuleModalProps> = ({
             <Button className="mr-2" secondary onClick={() => setOpen(false)}>
               Abbrechen
             </Button>
-            <Button type="submit">Erstellen</Button>
+            <Button type="submit">Aktualisieren</Button>
           </div>
         </Form>
       </Formik>

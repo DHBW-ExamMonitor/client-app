@@ -97,7 +97,7 @@ export const UpdateCourseModal: React.FC<UpdateCourseModalProps> = ({
               Abbrechen
             </Button>
             <Button loading={isLoading} type="submit">
-              Erstellen
+              Aktualisieren
             </Button>
           </div>
         </Form>
