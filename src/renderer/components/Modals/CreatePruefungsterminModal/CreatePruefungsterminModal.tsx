@@ -75,11 +75,13 @@ export const CreatePruefungsterminModal: React.FC<
           <Field name="modul">
             {({ field, meta }: FieldProps) => (
               <Dropdown field={field} meta={meta} label="Modul">
-                {modules?.map((module) => (
-                  <option key={module.id} value={module.id}>
-                    {module.name}
-                  </option>
-                ))}
+                {modules
+                  ?.filter((m) => m.aktiv)
+                  .map((module) => (
+                    <option key={module.id} value={module.id}>
+                      {module.name}
+                    </option>
+                  ))}
               </Dropdown>
             )}
           </Field>
