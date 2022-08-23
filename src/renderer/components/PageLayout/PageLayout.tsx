@@ -32,7 +32,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
         <div className="sm:flex sm:items-center">
           {navigateBackTo && (
             <Link to={navigateBackTo}>
-              <Button type="button" className="mr-4">
+              <Button type="button" className="mr-4" secondary>
                 Zurück
               </Button>
             </Link>

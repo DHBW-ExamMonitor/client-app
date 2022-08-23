@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
+import Spinner from '../Spinner';
 
 export interface ButtonProps {
   children?: React.ReactNode;
@@ -27,7 +28,7 @@ export const Button: React.FC<
         className
       )}
     >
-      {!loading ? children : 'Lädt...'}
+      {!loading ? children : <Spinner />}
     </button>
   );
 };

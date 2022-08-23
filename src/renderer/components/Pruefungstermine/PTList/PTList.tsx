@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Modules } from 'renderer/types/module';
 import { Pruefungstermine } from 'renderer/types/pruefungstermin';
 import PTListItem from './PTListItem';
@@ -9,10 +8,6 @@ type PTListProps = {
 };
 
 export const PTList: React.FC<PTListProps> = ({ data, modules }) => {
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   if (!data || !data.length)
     return (
       <div>
