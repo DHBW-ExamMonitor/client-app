@@ -16,7 +16,7 @@ export const CoursesList: React.FC<CoursesListProps> = ({ data }) => {
   if (!data || !data.length)
     return (
       <div>
-        <p>Keine Studierenden gefunden.</p>
+        <p>Keine Kurse gefunden.</p>
       </div>
     );
 

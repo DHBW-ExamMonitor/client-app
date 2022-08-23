@@ -5,9 +5,14 @@ import PTListItem from './PTListItem';
 type PTListProps = {
   data?: Pruefungstermine;
   modules?: Modules;
+  disableActions?: boolean;
 };
 
-export const PTList: React.FC<PTListProps> = ({ data, modules }) => {
+export const PTList: React.FC<PTListProps> = ({
+  data,
+  modules,
+  disableActions,
+}) => {
   if (!data || !data.length)
     return (
       <div>
@@ -68,10 +73,11 @@ export const PTList: React.FC<PTListProps> = ({ data, modules }) => {
             >
               Termin
             </th>
-
-            <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-              <span className="sr-only">Edit</span>
-            </th>
+            {!disableActions && (
+              <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                <span className="sr-only">Edit</span>
+              </th>
+            )}
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
@@ -80,6 +86,7 @@ export const PTList: React.FC<PTListProps> = ({ data, modules }) => {
               key={pruefungstermin.id}
               pruefungstermin={pruefungstermin}
               modules={modules}
+              disableActions={disableActions}
             />
           ))}
         </tbody>
