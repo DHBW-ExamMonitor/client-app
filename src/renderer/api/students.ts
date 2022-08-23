@@ -1,7 +1,13 @@
 import { Student, Students } from 'renderer/types/student';
 import api from './api';
 
-export const getStudents = async (): Promise<Students> => {
+export const getStudents = async (kursId: string | null): Promise<Students> => {
+  if (kursId) {
+    const get = await api.get(`/studenten/kurs/${kursId}`);
+    const data = await get.data;
+    return data;
+  }
+
   const get = await api.get('/studenten');
   const data = await get.data;
   return data;
