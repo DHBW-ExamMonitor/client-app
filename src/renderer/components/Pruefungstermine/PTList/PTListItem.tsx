@@ -38,6 +38,9 @@ export const PTListItem: React.FC<PTListItemProps> = ({
           </Link>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          {format(new Date(pruefungstermin.dateTime), 'dd.MM.yyyy HH:mm')}
+        </td>
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {pruefungstermin.modul.name}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -54,9 +57,6 @@ export const PTListItem: React.FC<PTListItemProps> = ({
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {pruefungstermin.notizen}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {format(new Date(pruefungstermin.dateTime), 'dd.MM.yyyy HH:mm')}
         </td>
 
         {!disableActions && (

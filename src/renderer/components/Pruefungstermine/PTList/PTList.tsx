@@ -35,6 +35,12 @@ export const PTList: React.FC<PTListProps> = ({
               scope="col"
               className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
             >
+              Termin
+            </th>
+            <th
+              scope="col"
+              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+            >
               Modul
             </th>
             <th
@@ -66,12 +72,6 @@ export const PTList: React.FC<PTListProps> = ({
               className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
             >
               Notizen
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Termin
             </th>
             {!disableActions && (
               <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
