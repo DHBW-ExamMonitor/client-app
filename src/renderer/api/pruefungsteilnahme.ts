@@ -35,4 +35,8 @@ export const updatePruefungsteilnahme = async (
   return data;
 };
 
-export default getPruefungsteilnahme;
+export const deletePruefungsteilnahme = async (id: string) => {
+  const del = await api.delete(`/pruefungsteilnahme/${id}`);
+  const data = await del.data;
+  return data;
+};

@@ -56,7 +56,7 @@ export const Kursliste: React.FC<KurslisteProps> = ({
 
   return (
     <div className="mb-16">
-      <div className="flex flex-row items-center">
+      <div className="flex flex-row items-center mb-8">
         <div className="w-48 mr-8 text-xl font-semibold text-gray-900">
           {kurs.name}
         </div>
@@ -64,29 +64,107 @@ export const Kursliste: React.FC<KurslisteProps> = ({
           Alle hinzufügen
         </Button>
       </div>
+      {data &&
+        data.filter((s) => teilnahmen.find((v) => v.studentId === s.id))
+          .length > 0 && (
+          <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg mb-8">
+            <table className="min-w-full divide-y divide-gray-300">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  >
+                    Name
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Versuch
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Status
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    {' '}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white">
+                {data
+                  ?.filter((s) => teilnahmen.find((v) => v.studentId === s.id))
+                  .map((student) => (
+                    <Teilnahme
+                      key={student.id}
+                      student={student}
+                      teilnahme={teilnahmen.find(
+                        (v) => v.studentId === student.id
+                      )}
+                      terminId={terminId}
+                    />
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        )}
 
-      {data
-        ?.filter((s) => teilnahmen.find((v) => v.studentId === s.id))
-        .map((student) => (
-          <Teilnahme
-            key={student.id}
-            student={student}
-            teilnahme={teilnahmen.find((v) => v.studentId === student.id)}
-            terminId={terminId}
-          />
-        ))}
-      <div className="mt-16">
-        {data
-          ?.filter((s) => !teilnahmen.find((v) => v.studentId === s.id))
-          .map((student) => (
-            <Teilnahme
-              key={student.id}
-              student={student}
-              teilnahme={teilnahmen.find((v) => v.studentId === student.id)}
-              terminId={terminId}
-            />
-          ))}
-      </div>
+      {data &&
+        data?.filter((s) => !teilnahmen.find((v) => v.studentId === s.id))
+          .length > 0 && (
+          <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+            <table className="min-w-full divide-y divide-gray-300">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+                  >
+                    Name
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Versuch
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Status
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    {' '}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white">
+                {data
+                  ?.filter((s) => !teilnahmen.find((v) => v.studentId === s.id))
+                  .map((student) => (
+                    <Teilnahme
+                      key={student.id}
+                      student={student}
+                      teilnahme={teilnahmen.find(
+                        (v) => v.studentId === student.id
+                      )}
+                      terminId={terminId}
+                    />
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        )}
     </div>
   );
 };

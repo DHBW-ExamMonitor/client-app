@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import getPruefungsteilnahme from 'renderer/api/pruefungsteilnahme';
+import { getPruefungsteilnahme } from 'renderer/api/pruefungsteilnahme';
 import { getPruefungstermin } from 'renderer/api/pruefungstermine';
 import PageLayout from 'renderer/components/PageLayout';
 import Kursliste from 'renderer/components/Pruefungstermine/Kursliste';
