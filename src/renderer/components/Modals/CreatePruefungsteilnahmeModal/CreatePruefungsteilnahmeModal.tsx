@@ -48,7 +48,7 @@ export const CreatePruefungsteilnahmeModal: React.FC<
           versuch: 'ERSTVERSUCH',
           studentId: student.id,
           pruefungsterminId: terminId,
-          pruefungsteilnahmeStatus: 'BESTANDEN',
+          pruefungsteilnahmeStatus: 'KEIN_STATUS',
           notizen: '',
         }}
         onSubmit={(values) => {

@@ -1,4 +1,5 @@
 export enum TeilnahmeStatus {
+  KEIN_STATUS,
   BESTANDEN,
   NICHT_BESTANDEN,
   ANGERECHNET,

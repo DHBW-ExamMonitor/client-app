@@ -4,7 +4,8 @@ import {
   Pruefungstermine,
 } from 'renderer/types/pruefungstermin';
 import api from './api';
-import getPruefungsteilnahme, {
+import {
+  getPruefungsteilnahme,
   createPruefungsteilnahme,
 } from './pruefungsteilnahme';
 
