@@ -31,8 +31,8 @@
     ]
   },
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.erb.ElectronReact",
+    "productName": "DHBW ExamMonitor",
+    "appId": "de.dhbw-ravensburg.exammonitor",
     "asar": true,
     "asarUnpack": "**\\*.{node,dll}",
     "files": [
@@ -87,12 +87,7 @@
     },
     "extraResources": [
       "./assets/**"
-    ],
-    "publish": {
-      "provider": "github",
-      "owner": "electron-react-boilerplate",
-      "repo": "electron-react-boilerplate"
-    }
+    ]
   },
   "license": "MIT",
   "jest": {
