@@ -16,6 +16,7 @@ export type CreateOrUpdatePruefungsteilnahmeDto = {
   studentId: string;
   versuch: string;
   pruefungsteilnahmeStatus: string;
+  notizen?: string;
 };
 
 export const createPruefungsteilnahme = async (

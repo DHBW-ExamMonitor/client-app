@@ -8,6 +8,7 @@ import {
 } from 'renderer/api/pruefungsteilnahme';
 import Button from 'renderer/components/Ui/Button';
 import Dropdown from 'renderer/components/Ui/Dropdown';
+import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
 import { TeilnahmeStatus, Versuch } from 'renderer/types/pruefungsteilnahme';
 import { Student } from 'renderer/types/student';
@@ -48,6 +49,7 @@ export const CreatePruefungsteilnahmeModal: React.FC<
           studentId: student.id,
           pruefungsterminId: terminId,
           pruefungsteilnahmeStatus: 'BESTANDEN',
+          notizen: '',
         }}
         onSubmit={(values) => {
           try {
@@ -87,6 +89,18 @@ export const CreatePruefungsteilnahmeModal: React.FC<
                     </option>
                   ))}
               </Dropdown>
+            )}
+          </Field>
+
+          <Field name="notizen">
+            {({ field, meta }: FieldProps) => (
+              <InputField
+                field={field}
+                meta={meta}
+                label="Notizen"
+                type="text"
+                placeholder="Notizen"
+              />
             )}
           </Field>
 

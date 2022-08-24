@@ -18,6 +18,7 @@ export type Pruefungsteilnahme = {
   pruefungsterminId: string;
   pruefungsteilnahmeStatus: TeilnahmeStatus;
   versuch: Versuch;
+  notizen?: string;
 };
 
 export type Pruefungsteilnahmen = Pruefungsteilnahme[];

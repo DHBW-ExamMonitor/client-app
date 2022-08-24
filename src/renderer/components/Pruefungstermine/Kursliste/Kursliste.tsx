@@ -93,6 +93,12 @@ export const Kursliste: React.FC<KurslisteProps> = ({
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
+                    Notizen
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
                     {' '}
                   </th>
                 </tr>
@@ -139,6 +145,12 @@ export const Kursliste: React.FC<KurslisteProps> = ({
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
                     Status
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Notizen
                   </th>
                   <th
                     scope="col"

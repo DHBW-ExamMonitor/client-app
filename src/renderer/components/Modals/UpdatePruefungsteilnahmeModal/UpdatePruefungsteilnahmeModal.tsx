@@ -8,6 +8,7 @@ import {
 } from 'renderer/api/pruefungsteilnahme';
 import Button from 'renderer/components/Ui/Button';
 import Dropdown from 'renderer/components/Ui/Dropdown';
+import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
 import {
   Pruefungsteilnahme,
@@ -51,6 +52,7 @@ export const UpdatePruefungsteilnahmeModal: React.FC<
           pruefungsterminId: teilnahme.pruefungsterminId,
           pruefungsteilnahmeStatus:
             teilnahme.pruefungsteilnahmeStatus.toString(),
+          notizen: teilnahme.notizen ?? '',
         }}
         onSubmit={(values) => {
           try {
@@ -90,6 +92,18 @@ export const UpdatePruefungsteilnahmeModal: React.FC<
                     </option>
                   ))}
               </Dropdown>
+            )}
+          </Field>
+
+          <Field name="notizen">
+            {({ field, meta }: FieldProps) => (
+              <InputField
+                field={field}
+                meta={meta}
+                label="Notizen"
+                type="text"
+                placeholder="Notizen"
+              />
             )}
           </Field>
 
