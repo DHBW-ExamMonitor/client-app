@@ -52,7 +52,8 @@ export const createPruefungsterminWithStudents = async (
 
   get.forEach(async (pruefungsteilnahme: Pruefungsteilnahme) => {
     if (
-      pruefungsteilnahme.pruefungsteilnahmeStatus.toString() !== 'BESTANDEN'
+      pruefungsteilnahme.pruefungsteilnahmeStatus.toString() !== 'BESTANDEN' &&
+      pruefungsteilnahme.pruefungsteilnahmeStatus.toString() !== 'ANGERECHNET'
     ) {
       await createPruefungsteilnahme({
         pruefungsterminId: post.id,

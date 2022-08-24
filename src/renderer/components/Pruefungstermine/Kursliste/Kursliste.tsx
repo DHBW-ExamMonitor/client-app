@@ -65,14 +65,28 @@ export const Kursliste: React.FC<KurslisteProps> = ({
         </Button>
       </div>
 
-      {data?.map((student) => (
-        <Teilnahme
-          key={student.id}
-          student={student}
-          teilnahme={teilnahmen.find((v) => v.studentId === student.id)}
-          terminId={terminId}
-        />
-      ))}
+      {data
+        ?.filter((s) => teilnahmen.find((v) => v.studentId === s.id))
+        .map((student) => (
+          <Teilnahme
+            key={student.id}
+            student={student}
+            teilnahme={teilnahmen.find((v) => v.studentId === student.id)}
+            terminId={terminId}
+          />
+        ))}
+      <div className="mt-16">
+        {data
+          ?.filter((s) => !teilnahmen.find((v) => v.studentId === s.id))
+          .map((student) => (
+            <Teilnahme
+              key={student.id}
+              student={student}
+              teilnahme={teilnahmen.find((v) => v.studentId === student.id)}
+              terminId={terminId}
+            />
+          ))}
+      </div>
     </div>
   );
 };
