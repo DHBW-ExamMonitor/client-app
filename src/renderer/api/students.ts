@@ -13,6 +13,12 @@ export const getStudents = async (kursId: string | null): Promise<Students> => {
   return data;
 };
 
+export const getStudent = async (studentId: string): Promise<Student> => {
+  const get = await api.get(`/studenten/${studentId}`);
+  const data = await get.data;
+  return data;
+};
+
 export const getStudentsByCourse = async (id: string): Promise<Students> => {
   const get = await api.get(`/studenten/kurs/${id}`);
   const data = await get.data;
