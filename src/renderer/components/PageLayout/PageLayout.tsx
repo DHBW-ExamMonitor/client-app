@@ -1,3 +1,4 @@
+import { ArrowLeftIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../Ui/Button';
@@ -32,14 +33,16 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="sm:flex sm:items-center">
           {navigateBack && (
-            <Button
-              type="button"
-              className="mr-4"
-              secondary
-              onClick={() => navigate(-1)}
-            >
-              Zurück
-            </Button>
+            <div>
+              <Button
+                type="button"
+                className="mr-4 rounded-full h-11 w-11 px-0 py-0 flex items-center justify-center"
+                secondary
+                onClick={() => navigate(-1)}
+              >
+                <ArrowLeftIcon className="h-5 w-5" />
+              </Button>
+            </div>
           )}
           <div className="sm:flex-auto">
             <h1 className="text-xl font-semibold text-gray-900">{title}</h1>
