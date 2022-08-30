@@ -46,8 +46,8 @@ export const Students: React.FC = () => {
       <CreateStudentModal open={open} setOpen={setOpen} />
       <PageLayout
         title="Studierende"
-        subTitle="Alle Studenten mit Matrikelnummer."
-        buttonText="Neuer Student"
+        subTitle="Alle Studierenden mit Matrikelnummer."
+        buttonText="Neue Studierende Person"
         buttonAction={() => setOpen(true)}
         buttonIcon={<PlusIcon className="h-5 w-5 mr-2" />}
       >
@@ -84,8 +84,8 @@ export const Students: React.FC = () => {
               <div className="mt-6 ml-4">
                 <CsvLink
                   data={csvData}
-                  filename="Studentenliste"
-                  buttonText="Studentenliste herunterladen"
+                  filename="Studierendenliste"
+                  buttonText="Studierendenliste herunterladen"
                 />
               </div>
             </Form>

@@ -113,7 +113,7 @@ export const CopyPruefungsterminModal: React.FC<
               <CheckboxField
                 field={field}
                 meta={meta}
-                label="Alle Studenten, bei denen der Status nicht 'Bestanden' oder 'Angerechnet' ist, kopieren"
+                label="Alle Studierenden, bei denen der Status nicht 'Bestanden' oder 'Angerechnet' ist, kopieren"
                 type="checkbox"
                 defaultChecked
               />

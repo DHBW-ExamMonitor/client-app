@@ -58,7 +58,7 @@ export const UpdateStudentModal: React.FC<UpdateStudentModalProps> = ({
           } catch (error) {
             console.log(error);
             toast.error(
-              `Fehler beim Bearbeiten des Studenten "${values.name}".`
+              `Fehler beim Bearbeiten des Studierenden "${values.name}".`
             );
           } finally {
             setOpen(false);
