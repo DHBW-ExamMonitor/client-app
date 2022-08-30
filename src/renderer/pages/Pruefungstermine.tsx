@@ -1,6 +1,7 @@
 import { PlusIcon } from '@heroicons/react/outline';
 import { Field, FieldProps, Form, Formik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
 import { getModules } from 'renderer/api/modules';
 import { getPruefungstermine } from 'renderer/api/pruefungstermine';
@@ -8,6 +9,7 @@ import CreatePruefungsterminModal from 'renderer/components/Modals/CreatePruefun
 import PageLayout from 'renderer/components/PageLayout';
 import PTList from 'renderer/components/Pruefungstermine/PTList';
 import CheckboxField from 'renderer/components/Ui/CheckboxField';
+import { Pruefungstermine } from 'renderer/types/pruefungstermin';
 
 /**
  * Pruefungstermine Component
@@ -19,42 +21,102 @@ export const Modules: React.FC = () => {
   const [showEmptyRooms, setShowEmptyRooms] = React.useState(false);
   const [showEmptySupervisors, setShowEmptySupervisors] = React.useState(false);
   const [showNextThreeMonths, setShowNextThreeMonths] = React.useState(false);
-  const filteredData = data
-    ?.filter((pt) => {
-      if (!showNextThreeMonths && !showEmptyRooms && !showEmptySupervisors) {
+  const [filteredData, setFilteredData] = React.useState<
+    Pruefungstermine | undefined
+  >([]);
+
+  useEffect(() => {
+    const temp: Pruefungstermine = [];
+    try {
+      data?.every((pt) => {
+        if (!showNextThreeMonths && !showEmptyRooms && !showEmptySupervisors) {
+          temp.push(pt);
+          return true;
+        }
+        if (
+          showNextThreeMonths &&
+          new Date(pt.dateTime) > new Date() &&
+          new Date(pt.dateTime) <
+            new Date(new Date().setMonth(new Date().getMonth() + 3)) &&
+          showEmptyRooms &&
+          pt.raeume.length === 0 &&
+          showEmptySupervisors &&
+          pt.aufsichtsPersonen.length === 0
+        ) {
+          temp.push(pt);
+          return true;
+        }
+        if (
+          !showEmptyRooms &&
+          showNextThreeMonths &&
+          new Date(pt.dateTime) > new Date() &&
+          new Date(pt.dateTime) <
+            new Date(new Date().setMonth(new Date().getMonth() + 3)) &&
+          showEmptySupervisors &&
+          pt.aufsichtsPersonen.length === 0
+        ) {
+          temp.push(pt);
+          return true;
+        }
+        if (
+          showNextThreeMonths &&
+          new Date(pt.dateTime) > new Date() &&
+          new Date(pt.dateTime) <
+            new Date(new Date().setMonth(new Date().getMonth() + 3)) &&
+          showEmptyRooms &&
+          pt.raeume.length === 0 &&
+          !showEmptySupervisors
+        ) {
+          temp.push(pt);
+          return true;
+        }
+        if (
+          !showNextThreeMonths &&
+          showEmptyRooms &&
+          pt.raeume.length === 0 &&
+          showEmptySupervisors &&
+          pt.aufsichtsPersonen.length === 0
+        ) {
+          temp.push(pt);
+          return true;
+        }
+        if (
+          !showNextThreeMonths &&
+          !showEmptyRooms &&
+          showEmptySupervisors &&
+          pt.aufsichtsPersonen.length === 0
+        ) {
+          temp.push(pt);
+          return true;
+        }
+        if (
+          !showNextThreeMonths &&
+          !showEmptySupervisors &&
+          showEmptyRooms &&
+          pt.raeume.length === 0
+        ) {
+          temp.push(pt);
+          return true;
+        }
+        if (
+          !showEmptyRooms &&
+          !showEmptySupervisors &&
+          showNextThreeMonths &&
+          new Date(pt.dateTime) > new Date() &&
+          new Date(pt.dateTime) <
+            new Date(new Date().setMonth(new Date().getMonth() + 3))
+        ) {
+          temp.push(pt);
+          return true;
+        }
         return true;
-      }
-      if (
-        showNextThreeMonths &&
-        new Date(pt.dateTime) > new Date() &&
-        new Date(pt.dateTime) <
-          new Date(new Date().setMonth(new Date().getMonth() + 3)) &&
-        showEmptyRooms &&
-        pt.raeume.length === 0 &&
-        showEmptySupervisors &&
-        pt.aufsichtsPersonen.length === 0
-      ) {
-        console.log('1');
-        console.log(pt);
-        return true;
-      } else if (
-        showNextThreeMonths &&
-        new Date(pt.dateTime) > new Date() &&
-        new Date(pt.dateTime) <
-          new Date(new Date().setMonth(new Date().getMonth() + 3)) &&
-        showEmptyRooms &&
-        pt.raeume.length === 0
-      ) {
-        console.log('2');
-        console.log(pt);
-        return true;
-      } else {
-        return false;
-      }
-    })
-    .sort(
-      (a, b) => new Date(a.dateTime).getTime() - new Date(b.dateTime).getTime()
-    );
+      });
+    } catch (e) {
+      toast.error('Es ist ein Fehler beim Anfragen der Daten aufgetreten.');
+    } finally {
+      setFilteredData(temp);
+    }
+  }, [data, showEmptyRooms, showEmptySupervisors, showNextThreeMonths]);
 
   return (
     <>
@@ -77,7 +139,6 @@ export const Modules: React.FC = () => {
             showNextThreeMonths: false,
           }}
           onSubmit={(values) => {
-            console.log(values);
             setShowEmptyRooms(values.showEmptyRooms);
             setShowEmptySupervisors(values.showEmptySupervisors);
             setShowNextThreeMonths(values.showNextThreeMonths);
@@ -127,7 +188,13 @@ export const Modules: React.FC = () => {
             </Form>
           )}
         </Formik>
-        <PTList data={filteredData} modules={modules.data} />
+        <PTList
+          data={filteredData?.sort(
+            (a, b) =>
+              new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime()
+          )}
+          modules={modules.data}
+        />
       </PageLayout>
     </>
   );
