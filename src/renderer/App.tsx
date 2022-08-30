@@ -20,7 +20,7 @@ export default function App() {
           <Route path="module" element={<Modules />} />
           <Route path="module/:id" element={<Module />} />
           <Route path="pruefungstermine" element={<Pruefungstermine />} />
-          <Route path="teilnahmen/:id" element={<Teilnahmen />} />
+          <Route path="pruefungstermine/:id" element={<Teilnahmen />} />
         </Route>
       </Routes>
     </Router>

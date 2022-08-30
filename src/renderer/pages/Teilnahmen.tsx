@@ -55,7 +55,11 @@ export const Teilnahmen: React.FC = () => {
       <PageLayout title="Teilnahmen" subTitle="" hideButton navigateBack>
         <Termininfo termin={data} />
         <div className="mb-8">
-          <CsvLink data={csvData} filename={`Teilnehmerliste ${data?.name}`} />
+          <CsvLink
+            data={csvData}
+            filename={`Teilnehmerliste ${data?.name}`}
+            buttonText="Teilnehmerliste herunterladen"
+          />
         </div>
         {data?.kurse.map((kurs) => (
           <Kursliste

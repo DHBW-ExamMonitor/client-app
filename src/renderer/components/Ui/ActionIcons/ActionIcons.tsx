@@ -1,4 +1,5 @@
 import {
+  DownloadIcon,
   DuplicateIcon,
   PencilAltIcon,
   TrashIcon,
@@ -12,6 +13,8 @@ export interface ActionIconsProps {
   deleteAction?: () => void;
   copyButton?: boolean;
   copyAction?: () => void;
+  downloadButton?: boolean;
+  downloadAction?: () => void;
 }
 
 /**
@@ -23,9 +26,16 @@ export const ActionIcons: React.FC<ActionIconsProps> = ({
   deleteAction,
   copyButton,
   copyAction,
+  downloadButton,
+  downloadAction,
 }) => {
   return (
     <div className={clsx('flex justify-end', className)}>
+      {downloadButton && (
+        <button onClick={downloadAction}>
+          <DownloadIcon className="h-5 w-5 mr-2 hover:text-blue-700" />
+        </button>
+      )}
       {copyButton && (
         <button onClick={copyAction}>
           <DuplicateIcon className="h-5 w-5 mr-2 hover:text-blue-700" />

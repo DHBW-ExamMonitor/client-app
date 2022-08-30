@@ -42,7 +42,8 @@ export const SideBar: React.FC = () => {
               <div
                 key={item.name}
                 className={clsx(
-                  item.href === location.pathname
+                  item.href === location.pathname ||
+                    (item.href !== '/' && location.pathname.includes(item.href))
                     ? 'bg-gray-100 text-gray-900'
                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                   'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
@@ -50,7 +51,9 @@ export const SideBar: React.FC = () => {
               >
                 <item.icon
                   className={clsx(
-                    item.href === location.pathname
+                    item.href === location.pathname ||
+                      (item.href !== '/' &&
+                        location.pathname.includes(item.href))
                       ? 'text-gray-500'
                       : 'text-gray-400 group-hover:text-gray-500',
                     'mr-3 flex-shrink-0 h-6 w-6'

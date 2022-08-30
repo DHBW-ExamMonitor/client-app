@@ -28,7 +28,6 @@ export const getPruefungstermineByModuleId = async (
 ): Promise<Pruefungstermine> => {
   const get = await api.get(`/pruefungstermine/modul/${id}`);
   const data = await get.data;
-  console.log(data);
   return data;
 };
 

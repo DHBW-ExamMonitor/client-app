@@ -11,6 +11,7 @@ import Button from 'renderer/components/Ui/Button';
 import WarningDialog from 'renderer/components/Ui/WarningDialog';
 import { Modules } from 'renderer/types/module';
 import { Pruefungstermin } from 'renderer/types/pruefungstermin';
+import * as ics from 'ics';
 
 export interface PTListItemProps {
   pruefungstermin: Pruefungstermin;
@@ -29,11 +30,66 @@ export const PTListItem: React.FC<PTListItemProps> = ({
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   const [openWarningDialog, setOpenWarningDialog] = useState<boolean>(false);
   const [copyModalOpen, setCopyModalOpen] = useState<boolean>(false);
+
+  function downloadFile(config: {
+    fileContents: string;
+    fileName: string;
+    mimeType: string;
+  }) {
+    const { mimeType, fileContents, fileName } = config;
+    const blob = new Blob([fileContents], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  const download = () => {
+    const start = new Date(pruefungstermin.dateTime);
+
+    ics.createEvent(
+      {
+        title: pruefungstermin.name,
+        description: ` Kurse: ${pruefungstermin.kurse
+          .map((k) => k.name)
+          .join(', ')}\n Modul: ${pruefungstermin.modul.name}\n Notizen: ${
+          pruefungstermin.notizen
+        }\n Aufsichtspersonen: ${
+          pruefungstermin.aufsichtsPersonen
+        }\n Hilfsmittel: ${pruefungstermin.hilfsmittel}\n Räume: ${
+          pruefungstermin.raeume
+        }`,
+        busyStatus: 'FREE',
+        start: [
+          start.getFullYear(),
+          start.getMonth(),
+          start.getDate(),
+          start.getHours(),
+          start.getMinutes(),
+        ],
+        duration: { minutes: 120 },
+      },
+      (error, value) => {
+        if (error) {
+          console.log(error);
+        }
+        downloadFile({
+          mimeType: 'text/calendar',
+          fileContents: value,
+          fileName: `${pruefungstermin.name}.ics`,
+        });
+      }
+    );
+  };
+
   return (
     <>
       <tr>
         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-          <Link to={`/teilnahmen/${pruefungstermin.id}`}>
+          <Link to={`/pruefungstermine/${pruefungstermin.id}`}>
             <Button type="button">{pruefungstermin.name}</Button>
           </Link>
         </td>
@@ -63,8 +119,10 @@ export const PTListItem: React.FC<PTListItemProps> = ({
           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
             <ActionIcons
               copyButton
+              downloadButton
               editAction={() => setUpdateModalOpen(true)}
               copyAction={() => setCopyModalOpen(true)}
+              downloadAction={download}
               deleteAction={() => setOpenWarningDialog(true)}
             />
           </td>
