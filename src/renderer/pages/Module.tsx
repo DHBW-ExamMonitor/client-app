@@ -45,6 +45,7 @@ export const Module: React.FC = () => {
     <>
       <PageLayout
         title={`Modul "${modules?.find((a) => a.id === id)?.name ?? ''}"`}
+        subTitle="Alle Prüfungstermine"
       >
         <Formik
           initialValues={{
