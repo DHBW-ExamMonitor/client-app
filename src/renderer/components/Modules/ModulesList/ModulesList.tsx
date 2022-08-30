@@ -64,9 +64,9 @@ export const ModulesList: React.FC<ModulesListProps> = ({ data }) => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
-              {filteredData?.map((module) => {
-                return <ModulesListItem key={module.id} module={module} />;
-              })}
+              {filteredData?.map((module) => (
+                <ModulesListItem key={module.id} module={module} />
+              ))}
             </tbody>
           </table>
         </div>

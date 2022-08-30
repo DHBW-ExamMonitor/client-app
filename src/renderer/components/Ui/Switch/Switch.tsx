@@ -22,6 +22,7 @@ export const Switch: React.FC<SwitchProps> = ({
       <div className="flex items-center justify-between bg-gray-200 p-1 rounded-xl space-x-1">
         {values.map((value, i) => (
           <button
+            key={value}
             type="button"
             className={clsx(
               'h-12 w-[50%] rounded-xl flex items-center justify-center',
