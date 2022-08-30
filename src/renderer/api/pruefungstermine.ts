@@ -23,6 +23,15 @@ export const getPruefungstermin = async (
   return data;
 };
 
+export const getPruefungstermineByModuleId = async (
+  id: string
+): Promise<Pruefungstermine> => {
+  const get = await api.get(`/pruefungstermine/modul/${id}`);
+  const data = await get.data;
+  console.log(data);
+  return data;
+};
+
 export type CreateOrUpdatePruefungsterminDto = {
   name: string;
   hilfsmittel?: string;

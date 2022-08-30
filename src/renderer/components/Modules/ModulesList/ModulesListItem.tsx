@@ -1,9 +1,11 @@
 import React from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import { queryClient } from 'renderer/api/api';
 import { deleteModule } from 'renderer/api/modules';
 import UpdateModuleModal from 'renderer/components/Modals/UpdateModuleModal';
 import ActionIcons from 'renderer/components/Ui/ActionIcons';
+import Button from 'renderer/components/Ui/Button';
 import WarningDialog from 'renderer/components/Ui/WarningDialog';
 import { Module } from 'renderer/types/module';
 
@@ -23,7 +25,9 @@ export const ModulesListItem: React.FC<ModulesListItemProps> = ({ module }) => {
     <>
       <tr>
         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-          {module.name}
+          <Link to={`/module/${module.id}`}>
+            <Button>{module.name}</Button>
+          </Link>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {module.vorlesungen}
