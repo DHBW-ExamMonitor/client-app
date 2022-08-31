@@ -26,10 +26,6 @@ export const CourseInfo: React.FC<CourseInfoProps> = ({ course }) => {
           </div>
         </div>
       </div>
-      <div className="text-sm">
-        <p>Die CSV-Datei sollte folgendes Format haben: </p>
-        <p>student;matrikelnr</p>
-      </div>
     </>
   );
 };
