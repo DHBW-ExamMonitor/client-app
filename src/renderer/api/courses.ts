@@ -7,6 +7,12 @@ export const getCourses = async (): Promise<Courses> => {
   return data;
 };
 
+export const getCourse = async (id: string): Promise<Course> => {
+  const get = await api.get(`/kurse/${id}`);
+  const data = await get.data;
+  return data;
+};
+
 export type CreateCourseDto = {
   name: string;
   studienende: Date;

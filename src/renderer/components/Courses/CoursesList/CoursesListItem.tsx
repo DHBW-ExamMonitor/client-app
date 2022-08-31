@@ -1,10 +1,12 @@
 import { format } from 'date-fns';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import { queryClient } from 'renderer/api/api';
 import { deleteCourse } from 'renderer/api/courses';
 import UpdateCourseModal from 'renderer/components/Modals/UpdateCourseModal';
 import ActionIcons from 'renderer/components/Ui/ActionIcons';
+import Button from 'renderer/components/Ui/Button';
 import WarningDialog from 'renderer/components/Ui/WarningDialog';
 import { Course } from 'renderer/types/course';
 
@@ -48,7 +50,9 @@ export const CoursesListItem: React.FC<CoursesListItemProps> = ({ course }) => {
       />
       <tr>
         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-          {course.name}
+          <Link to={`/kurse/${course.id}`}>
+            <Button>{course.name}</Button>
+          </Link>
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {format(new Date(course.studienende), 'dd.MM.yyyy')}
