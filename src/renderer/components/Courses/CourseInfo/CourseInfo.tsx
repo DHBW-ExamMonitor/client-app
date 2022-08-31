@@ -18,11 +18,11 @@ export const CourseInfo: React.FC<CourseInfoProps> = ({ course }) => {
           <div>Studienende:</div>
         </div>
         <div className="text-sm text-gray-500 flex-col">
-          <div>{course?.name}</div>
+          <div>{course && course.name}</div>
           <div>
             {course &&
               course.studienende &&
-              format(new Date(course?.studienende), 'dd.MM.yyyy')}
+              format(new Date(course.studienende), 'dd.MM.yyyy')}
           </div>
         </div>
       </div>
