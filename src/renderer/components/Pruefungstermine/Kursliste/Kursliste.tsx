@@ -65,6 +65,7 @@ export const Kursliste: React.FC<KurslisteProps> = ({
         </Button>
       </div>
       {data &&
+        data.length > 0 &&
         data.filter((s) => teilnahmen.find((v) => v.studentId === s.id))
           .length > 0 && (
           <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg mb-8">
