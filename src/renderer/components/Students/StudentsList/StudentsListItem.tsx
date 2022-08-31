@@ -62,7 +62,7 @@ export const StudentsListItem: React.FC<StudentsListItemProps> = ({
           {student.name}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {student.studentenStatus}
+          {student.studentenStatus.toLowerCase()}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {course?.name}

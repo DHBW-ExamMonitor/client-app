@@ -23,7 +23,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ pageTitle }) => {
 
   return (
     <>
-      <PageLayout title={pageTitle} subTitle="Prüfungen der nächsten 3 Monate">
+      <PageLayout title={pageTitle} subTitle="Prüfungen der nächsten 3 Monate.">
         <PTList data={nextThreeMonths} disableActions />
       </PageLayout>
     </>

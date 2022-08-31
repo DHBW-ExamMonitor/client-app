@@ -85,9 +85,9 @@ export const CreateStudentModal: React.FC<CreateStudentModalProps> = ({
           <Field name="studentenStatus">
             {({ field, meta }: FieldProps) => (
               <Dropdown field={field} meta={meta} label="Status">
-                {['IMMATRIKULIERT', 'EXMATRIKULIERT'].map((service) => (
-                  <option key={service} value={service}>
-                    {service}
+                {['IMMATRIKULIERT', 'EXMATRIKULIERT'].map((status) => (
+                  <option key={status} value={status}>
+                    {status.toLowerCase()}
                   </option>
                 ))}
               </Dropdown>
