@@ -53,11 +53,13 @@ export const Teilnahmen: React.FC = () => {
     <>
       <PageLayout title="Teilnahmen" subTitle="" hideButton navigateBack>
         <Termininfo termin={data} />
-        <div className="mb-8">
-          <Button type="button" onClick={downloadCSV}>
-            Teilnehmerliste herunterladen
-          </Button>
-        </div>
+        {teilnahmen.data && teilnahmen.data.length > 0 && (
+          <div className="mb-8">
+            <Button type="button" onClick={downloadCSV}>
+              Teilnehmerliste herunterladen
+            </Button>
+          </div>
+        )}
         {data?.kurse.map((kurs) => (
           <Kursliste
             key={kurs.id}

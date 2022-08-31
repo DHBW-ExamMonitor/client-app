@@ -84,11 +84,13 @@ export const Students: React.FC = () => {
                   </Dropdown>
                 )}
               </Field>
-              <div className="mt-6 ml-4">
-                <Button type="button" onClick={downloadCSV}>
-                  Studierendenliste herunterladen
-                </Button>
-              </div>
+              {data && data.length > 0 && (
+                <div className="mt-6 ml-4">
+                  <Button type="button" onClick={downloadCSV}>
+                    Studierendenliste herunterladen
+                  </Button>
+                </div>
+              )}
             </Form>
           )}
         </Formik>
