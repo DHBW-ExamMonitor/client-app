@@ -4,40 +4,43 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getCourses } from 'renderer/api/courses';
 import { getStudents } from 'renderer/api/students';
+import capitalize from 'renderer/capitalize';
 import CreateStudentModal from 'renderer/components/Modals/CreateStudentModal';
 import PageLayout from 'renderer/components/PageLayout';
 import StudentsList from 'renderer/components/Students/StudentsList';
-import CsvLink from 'renderer/components/Ui/CsvLink';
+import Button from 'renderer/components/Ui/Button';
 import Dropdown from 'renderer/components/Ui/Dropdown';
+import downloadFile from 'renderer/downloadFile';
 
 /**
  * Students Component
  */
 export const Students: React.FC = () => {
   const [kursId, setKursId] = useState<string | null>(null);
-  const [csvData, setCsvData] = useState<object[]>([]);
   const { data: courses } = useQuery('courses', getCourses);
 
-  const { data } = useQuery(
-    ['students', kursId],
-    async (context) => {
-      return getStudents(context.queryKey[1]);
-    },
-    {
-      onSuccess: (s) => {
-        const temp: object[] = [];
-        s.forEach((student) => {
-          temp.push({
-            Matrikelnummer: student.matrikelnummer,
-            Name: student.name,
-            Status: student.studentenStatus,
-            kurs: courses?.find((course) => course.id === student.kursId)?.name,
-          });
-        });
-        setCsvData(temp);
-      },
+  const { data } = useQuery(['students', kursId], async (context) => {
+    return getStudents(context.queryKey[1]);
+  });
+
+  const downloadCSV = async () => {
+    if (data && data.length) {
+      let csvContent = 'Matrikelnummer;Name;Status;Kurs\r\n';
+      data.forEach((student) => {
+        csvContent += `${student.matrikelnummer};${student.name};${capitalize(
+          student.studentenStatus
+        )};${
+          courses?.find((course) => course.id === student.kursId)?.name
+        }\r\n`;
+      });
+
+      downloadFile({
+        fileContents: csvContent,
+        fileName: 'Studierendenliste',
+        mimeType: 'text/csv',
+      });
     }
-  );
+  };
 
   const [open, setOpen] = React.useState(false);
 
@@ -82,11 +85,9 @@ export const Students: React.FC = () => {
                 )}
               </Field>
               <div className="mt-6 ml-4">
-                <CsvLink
-                  data={csvData}
-                  filename="Studierendenliste"
-                  buttonText="Studierendenliste herunterladen"
-                />
+                <Button type="button" onClick={downloadCSV}>
+                  Studierendenliste herunterladen
+                </Button>
               </div>
             </Form>
           )}
