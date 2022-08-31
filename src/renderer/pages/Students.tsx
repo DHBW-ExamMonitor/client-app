@@ -1,4 +1,4 @@
-import { PlusIcon } from '@heroicons/react/outline';
+import { DownloadIcon, PlusIcon } from '@heroicons/react/outline';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
@@ -87,6 +87,7 @@ export const Students: React.FC = () => {
               {data && data.length > 0 && (
                 <div className="mt-6 ml-4">
                   <Button type="button" onClick={downloadCSV}>
+                    <DownloadIcon className="h-5 w-5 mr-2" />
                     Studierendenliste herunterladen
                   </Button>
                 </div>

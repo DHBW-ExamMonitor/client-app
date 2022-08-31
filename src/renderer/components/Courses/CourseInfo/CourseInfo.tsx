@@ -13,7 +13,7 @@ export const CourseInfo: React.FC<CourseInfoProps> = ({ course }) => {
   return (
     <>
       <div className="flex flex-row mb-8">
-        <div className="text-sm text-gray-500 mr-2 flex-col">
+        <div className="text-sm text-gray-8000 mr-6 flex-col">
           <div>Name:</div>
           <div>Studienende:</div>
         </div>
@@ -25,6 +25,10 @@ export const CourseInfo: React.FC<CourseInfoProps> = ({ course }) => {
               format(new Date(course.studienende), 'dd.MM.yyyy')}
           </div>
         </div>
+      </div>
+      <div className="text-sm">
+        <p>Die CSV-Datei sollte folgendes Format haben: </p>
+        <p>student;matrikelnr</p>
       </div>
     </>
   );

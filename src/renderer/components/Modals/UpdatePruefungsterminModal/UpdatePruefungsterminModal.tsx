@@ -15,6 +15,7 @@ import Modal from 'renderer/components/Ui/Modal';
 import MultiselectDropdown, {
   MultiselectValue,
 } from 'renderer/components/Ui/MultiselectDropdown/MultiselectDropdown';
+import TextAreaField from 'renderer/components/Ui/TextAreaField';
 import { Modules } from 'renderer/types/module';
 import { Pruefungstermin } from 'renderer/types/pruefungstermin';
 import createAndUpdatePruefungsterminFormValidationSchema from '../validation/createAndUpdatePruefungsterminFormValidationSchema';
@@ -166,12 +167,13 @@ export const UpdatePruefungsterminModal: React.FC<
 
           <Field name="notizen">
             {({ field, meta }: FieldProps) => (
-              <InputField
+              <TextAreaField
                 field={field}
                 meta={meta}
                 label="Notizen"
-                type="text"
+                rows={5}
                 placeholder="Notizen"
+                maxChars={1000}
               />
             )}
           </Field>

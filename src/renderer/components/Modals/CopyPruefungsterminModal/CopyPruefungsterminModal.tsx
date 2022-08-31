@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { format } from 'date-fns';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useMutation, useQuery } from 'react-query';
@@ -10,13 +11,13 @@ import {
   createPruefungsterminWithStudents,
 } from 'renderer/api/pruefungstermine';
 import Button from 'renderer/components/Ui/Button';
+import CheckboxField from 'renderer/components/Ui/CheckboxField';
 import InputField from 'renderer/components/Ui/InputField';
 import Modal from 'renderer/components/Ui/Modal';
 import MultiselectDropdown from 'renderer/components/Ui/MultiselectDropdown';
 import { MultiselectValue } from 'renderer/components/Ui/MultiselectDropdown/MultiselectDropdown';
-import { format } from 'date-fns';
+import TextAreaField from 'renderer/components/Ui/TextAreaField';
 import { Pruefungstermin } from 'renderer/types/pruefungstermin';
-import CheckboxField from 'renderer/components/Ui/CheckboxField';
 import createAndUpdatePruefungsterminFormValidationSchema from '../validation/createAndUpdatePruefungsterminFormValidationSchema';
 
 export interface CopyPruefungsterminModalProps {
@@ -188,12 +189,13 @@ export const CopyPruefungsterminModal: React.FC<
 
           <Field name="notizen">
             {({ field, meta }: FieldProps) => (
-              <InputField
+              <TextAreaField
                 field={field}
                 meta={meta}
                 label="Notizen"
-                type="text"
+                rows={5}
                 placeholder="Notizen"
+                maxChars={1000}
               />
             )}
           </Field>

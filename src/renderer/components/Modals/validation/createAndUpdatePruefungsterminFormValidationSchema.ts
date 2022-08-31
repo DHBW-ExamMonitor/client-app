@@ -8,7 +8,7 @@ export const createAndUpdatePruefungsterminFormValidationSchema = Yup.object({
   hilfsmittel: Yup.string().min(5, 'Zu kurz!').max(100, 'Zu lang!'),
   raueme: Yup.string().min(5, 'Zu kurz!').max(100, 'Zu lang!'),
   aufsichtsPersonen: Yup.string().min(5, 'Zu kurz!').max(100, 'Zu lang!'),
-  notizen: Yup.string().min(5, 'Zu kurz!').max(100, 'Zu lang!'),
+  notizen: Yup.string().min(5, 'Zu kurz!').max(1000, 'Zu lang!'),
   dateTime: Yup.string()
     .min(5, 'Zu kurz!')
     .max(100, 'Zu lang!')

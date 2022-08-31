@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import * as ics from 'ics';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
@@ -8,12 +9,11 @@ import CopyPruefungsterminModal from 'renderer/components/Modals/CopyPruefungste
 import UpdatePruefungsterminModal from 'renderer/components/Modals/UpdatePruefungsterminModal';
 import ActionIcons from 'renderer/components/Ui/ActionIcons';
 import Button from 'renderer/components/Ui/Button';
+import TableData from 'renderer/components/Ui/TableData';
 import WarningDialog from 'renderer/components/Ui/WarningDialog';
+import downloadFile from 'renderer/downloadFile';
 import { Modules } from 'renderer/types/module';
 import { Pruefungstermin } from 'renderer/types/pruefungstermin';
-import * as ics from 'ics';
-import downloadFile from 'renderer/downloadFile';
-import TableData from 'renderer/components/Ui/TableData';
 
 export interface PTListItemProps {
   pruefungstermin: Pruefungstermin;
@@ -89,7 +89,13 @@ export const PTListItem: React.FC<PTListItemProps> = ({
         <TableData data={pruefungstermin.hilfsmittel ?? ''} />
         <TableData data={pruefungstermin.raeume} />
         <TableData data={pruefungstermin.aufsichtsPersonen} />
-        <TableData data={pruefungstermin.notizen} />
+        <TableData
+          data={
+            pruefungstermin.notizen.length > 25
+              ? `${pruefungstermin.notizen.slice(0, 25)}...`
+              : pruefungstermin.notizen
+          }
+        />
 
         {!disableActions && (
           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">

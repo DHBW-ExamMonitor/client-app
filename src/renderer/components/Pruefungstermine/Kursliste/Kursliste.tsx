@@ -53,84 +53,84 @@ export const Kursliste: React.FC<KurslisteProps> = ({
     }
   };
 
+  if (!data || !data.length) {
+    return null;
+  }
+
   return (
     <div className="mb-16">
       <div className="flex flex-row items-center mb-8">
         <div className="w-48 mr-8 text-xl font-semibold text-gray-900">
           {kurs.name}
         </div>
-        {data &&
-          data.filter((s) => teilnahmen.find((v) => v.studentId === s.id))
-            .length !== data?.length && (
-            <Button type="button" onClick={addAllStudents}>
-              {kurs.name} hinzufügen
-            </Button>
-          )}
+        {data?.filter((s) => teilnahmen.find((v) => v.studentId === s.id))
+          .length !== data?.length && (
+          <Button type="button" onClick={addAllStudents}>
+            {kurs.name} hinzufügen
+          </Button>
+        )}
       </div>
-      {data &&
-        data.length > 0 &&
-        data.filter((s) => teilnahmen.find((v) => v.studentId === s.id))
-          .length > 0 && (
-          <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg mb-8">
-            <table className="min-w-full divide-y divide-gray-300">
-              <thead className="bg-gray-50">
-                <tr>
-                  <TableHead name="Name" className="sm:pl-6" />
-                  <TableHead name="Versuch" />
-                  <TableHead name="Status" />
-                  <TableHead name="Notizen" />
-                  <TableHead name="" />
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 bg-white">
-                {data
-                  ?.filter((s) => teilnahmen.find((v) => v.studentId === s.id))
-                  .map((student) => (
-                    <Teilnahme
-                      key={student.id}
-                      student={student}
-                      teilnahme={teilnahmen.find(
-                        (v) => v.studentId === student.id
-                      )}
-                      terminId={terminId}
-                    />
-                  ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+      {data?.filter((s) => teilnahmen.find((v) => v.studentId === s.id))
+        .length > 0 && (
+        <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg mb-8">
+          <table className="min-w-full divide-y divide-gray-300">
+            <thead className="bg-gray-50">
+              <tr>
+                <TableHead name="Name" className="sm:pl-6" />
+                <TableHead name="Versuch" />
+                <TableHead name="Status" />
+                <TableHead name="Notizen" />
+                <TableHead name="" />
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200 bg-white">
+              {data
+                ?.filter((s) => teilnahmen.find((v) => v.studentId === s.id))
+                .map((student) => (
+                  <Teilnahme
+                    key={student.id}
+                    student={student}
+                    teilnahme={teilnahmen.find(
+                      (v) => v.studentId === student.id
+                    )}
+                    terminId={terminId}
+                  />
+                ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
-      {data &&
-        data?.filter((s) => !teilnahmen.find((v) => v.studentId === s.id))
-          .length > 0 && (
-          <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-            <table className="min-w-full divide-y divide-gray-300">
-              <thead className="bg-gray-50">
-                <tr>
-                  <TableHead name="Name" className="sm:pl-6" />
-                  <TableHead name="Versuch" />
-                  <TableHead name="Status" />
-                  <TableHead name="Notizen" />
-                  <TableHead name="" />
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 bg-white">
-                {data
-                  ?.filter((s) => !teilnahmen.find((v) => v.studentId === s.id))
-                  .map((student) => (
-                    <Teilnahme
-                      key={student.id}
-                      student={student}
-                      teilnahme={teilnahmen.find(
-                        (v) => v.studentId === student.id
-                      )}
-                      terminId={terminId}
-                    />
-                  ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+      {data?.filter((s) => !teilnahmen.find((v) => v.studentId === s.id))
+        .length > 0 && (
+        <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+          <table className="min-w-full divide-y divide-gray-300">
+            <thead className="bg-gray-50">
+              <tr>
+                <TableHead name="Name" className="sm:pl-6" />
+                <TableHead name="Versuch" />
+                <TableHead name="Status" />
+                <TableHead name="Notizen" />
+                <TableHead name="" />
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200 bg-white">
+              {data
+                ?.filter((s) => !teilnahmen.find((v) => v.studentId === s.id))
+                .map((student) => (
+                  <Teilnahme
+                    key={student.id}
+                    student={student}
+                    teilnahme={teilnahmen.find(
+                      (v) => v.studentId === student.id
+                    )}
+                    terminId={terminId}
+                  />
+                ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { Importer, ImporterField } from 'react-csv-importer';
+import { Importer, ImporterField, deDE } from 'react-csv-importer';
 
 // include the widget CSS file whichever way your bundler supports it
 import 'react-csv-importer/dist/index.css';
@@ -22,6 +22,7 @@ export const StudentsImporter: React.FC<StudentsImporterProps> = ({
         Studierende importieren:
       </h1>
       <Importer
+        locale={deDE}
         assumeNoHeaders={false}
         restartable={false}
         delimiter=";"

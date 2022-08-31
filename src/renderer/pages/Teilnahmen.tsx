@@ -1,3 +1,4 @@
+import { DownloadIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
@@ -8,7 +9,6 @@ import capitalize from 'renderer/capitalize';
 import PageLayout from 'renderer/components/PageLayout';
 import Kursliste from 'renderer/components/Pruefungstermine/Kursliste';
 import Termininfo from 'renderer/components/Pruefungstermine/Termininfo';
-import Button from 'renderer/components/Ui/Button';
 import downloadFile from 'renderer/downloadFile';
 
 /**
@@ -51,15 +51,21 @@ export const Teilnahmen: React.FC = () => {
 
   return (
     <>
-      <PageLayout title="Teilnahmen" subTitle="" hideButton navigateBack>
+      <PageLayout
+        title="Teilnahmen"
+        subTitle=""
+        navigateBack
+        {...(teilnahmen.data?.length && teilnahmen.data.length > 0
+          ? {
+              buttonAction: () => {
+                downloadCSV();
+              },
+              buttonText: 'Teilnehmerliste herunterladen',
+              buttonIcon: <DownloadIcon className="h-5 w-5 mr-2" />,
+            }
+          : {})}
+      >
         <Termininfo termin={data} />
-        {teilnahmen.data && teilnahmen.data.length > 0 && (
-          <div className="mb-8">
-            <Button type="button" onClick={downloadCSV}>
-              Teilnehmerliste herunterladen
-            </Button>
-          </div>
-        )}
         {data?.kurse.map((kurs) => (
           <Kursliste
             key={kurs.id}
