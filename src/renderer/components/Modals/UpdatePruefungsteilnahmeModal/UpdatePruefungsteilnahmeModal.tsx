@@ -6,6 +6,7 @@ import {
   CreateOrUpdatePruefungsteilnahmeDto,
   updatePruefungsteilnahme,
 } from 'renderer/api/pruefungsteilnahme';
+import capitalize from 'renderer/capitalize';
 import Button from 'renderer/components/Ui/Button';
 import Dropdown from 'renderer/components/Ui/Dropdown';
 import InputField from 'renderer/components/Ui/InputField';
@@ -74,7 +75,7 @@ export const UpdatePruefungsteilnahmeModal: React.FC<
                   .filter((v) => typeof v === 'string')
                   .map((v) => (
                     <option key={v} value={v}>
-                      {v}
+                      {capitalize(v.toString())}
                     </option>
                   ))}
               </Dropdown>
@@ -88,7 +89,7 @@ export const UpdatePruefungsteilnahmeModal: React.FC<
                   .filter((v) => typeof v === 'string')
                   .map((v) => (
                     <option key={v} value={v}>
-                      {v}
+                      {capitalize(v.toString())}
                     </option>
                   ))}
               </Dropdown>

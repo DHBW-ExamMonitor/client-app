@@ -4,6 +4,7 @@ import { useMutation, useQuery } from 'react-query';
 import { queryClient } from 'renderer/api/api';
 import { getCourses } from 'renderer/api/courses';
 import { createStudent, CreateStudentDto } from 'renderer/api/students';
+import capitalize from 'renderer/capitalize';
 import Button from 'renderer/components/Ui/Button';
 import Dropdown from 'renderer/components/Ui/Dropdown';
 import InputField from 'renderer/components/Ui/InputField';
@@ -87,7 +88,7 @@ export const CreateStudentModal: React.FC<CreateStudentModalProps> = ({
               <Dropdown field={field} meta={meta} label="Status">
                 {['IMMATRIKULIERT', 'EXMATRIKULIERT'].map((status) => (
                   <option key={status} value={status}>
-                    {status.toLowerCase()}
+                    {capitalize(status)}
                   </option>
                 ))}
               </Dropdown>

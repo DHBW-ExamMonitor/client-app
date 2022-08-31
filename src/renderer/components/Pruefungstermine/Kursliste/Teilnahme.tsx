@@ -2,6 +2,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { queryClient } from 'renderer/api/api';
 import { deletePruefungsteilnahme } from 'renderer/api/pruefungsteilnahme';
+import capitalize from 'renderer/capitalize';
 import CreatePruefungsteilnahmeModal from 'renderer/components/Modals/CreatePruefungsteilnahmeModal';
 import UpdatePruefungsteilnahmeModal from 'renderer/components/Modals/UpdatePruefungsteilnahmeModal';
 import ActionIcons from 'renderer/components/Ui/ActionIcons';
@@ -33,7 +34,7 @@ export const Teilnahme: React.FC<TeilnahmeProps> = ({
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {teilnahme ? (
-            <>{teilnahme.versuch}</>
+            <>{capitalize(teilnahme.versuch.toString())}</>
           ) : (
             <>
               <div>Keine Teilnahme</div>
@@ -42,7 +43,7 @@ export const Teilnahme: React.FC<TeilnahmeProps> = ({
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {teilnahme ? (
-            <>{teilnahme.pruefungsteilnahmeStatus}</>
+            <>{capitalize(teilnahme.pruefungsteilnahmeStatus.toString())}</>
           ) : (
             <>
               <div>Kein Status</div>

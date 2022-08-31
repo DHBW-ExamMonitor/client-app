@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { queryClient } from 'renderer/api/api';
 import { getCourses } from 'renderer/api/courses';
 import { deleteStudent } from 'renderer/api/students';
+import capitalize from 'renderer/capitalize';
 import UpdateStudentModal from 'renderer/components/Modals/UpdateStudentModal';
 import ActionIcons from 'renderer/components/Ui/ActionIcons';
 import WarningDialog from 'renderer/components/Ui/WarningDialog';
@@ -62,7 +63,7 @@ export const StudentsListItem: React.FC<StudentsListItemProps> = ({
           {student.name}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {student.studentenStatus.toLowerCase()}
+          {capitalize(student.studentenStatus)}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {course?.name}
