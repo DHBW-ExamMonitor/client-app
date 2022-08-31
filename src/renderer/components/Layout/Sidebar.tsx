@@ -35,7 +35,11 @@ export const SideBar: React.FC = () => {
     <div className="flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white">
       <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
         <div className="flex items-center flex-shrink-0 px-4">
-          <img className="h-10 w-auto" src={logo} alt="Workflow" />
+          <img
+            className="h-16 w-auto object-contain"
+            src={logo}
+            alt="DHBW-ExamMonitor"
+          />
         </div>
         <nav className="mt-5 flex-1 px-2 bg-white space-y-1">
           {navigation.map((item) => (
