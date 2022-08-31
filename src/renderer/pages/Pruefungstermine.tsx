@@ -17,9 +17,6 @@ export const Modules: React.FC = () => {
   const { data } = useQuery('pruefungstermine', getPruefungstermine);
   const modules = useQuery('modules', getModules);
   const [open, setOpen] = useState(false);
-  const [showEmptyRooms, setShowEmptyRooms] = useState(false);
-  const [showEmptySupervisors, setShowEmptySupervisors] = useState(false);
-  const [showNextThreeMonths, setShowNextThreeMonths] = useState(false);
   const [filteredData, setFilteredData] = useState<Pruefungstermine>([]);
 
   const filter = async (
@@ -54,13 +51,8 @@ export const Modules: React.FC = () => {
   };
 
   useEffect(() => {
-    filter(
-      data ?? [],
-      showEmptyRooms,
-      showEmptySupervisors,
-      showNextThreeMonths
-    );
-  }, [data, showEmptyRooms, showEmptySupervisors, showNextThreeMonths]);
+    setFilteredData(data ?? []);
+  }, [data]);
 
   return (
     <>
@@ -83,9 +75,12 @@ export const Modules: React.FC = () => {
             showNextThreeMonths: false,
           }}
           onSubmit={(values) => {
-            setShowEmptyRooms(values.showEmptyRooms);
-            setShowEmptySupervisors(values.showEmptySupervisors);
-            setShowNextThreeMonths(values.showNextThreeMonths);
+            filter(
+              data ?? [],
+              values.showEmptyRooms,
+              values.showEmptySupervisors,
+              values.showNextThreeMonths
+            );
           }}
         >
           {({ submitForm }) => (
