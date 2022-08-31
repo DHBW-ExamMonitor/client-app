@@ -38,7 +38,7 @@ export const StudentsImporter: React.FC<StudentsImporterProps> = ({
               await createStudent(student);
             } catch (e) {
               toast.error(
-                `Studierende/-r mit Matrikelnummer ${row.matrikelnr} konnte nicht hinzugefügt werden. Bitte überprüfen Sie die Daten (z.B. eindeutige Matrikelnummer).`
+                `Studierende/r mit Matrikelnummer ${row.matrikelnr} konnte nicht hinzugefügt werden. Bitte überprüfen Sie die Daten (z.B. eindeutige Matrikelnummer).`
               );
             }
           }
