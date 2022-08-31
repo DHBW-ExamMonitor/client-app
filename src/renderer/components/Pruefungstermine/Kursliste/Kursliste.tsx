@@ -59,11 +59,13 @@ export const Kursliste: React.FC<KurslisteProps> = ({
         <div className="w-48 mr-8 text-xl font-semibold text-gray-900">
           {kurs.name}
         </div>
-        {teilnahmen.length !== data?.length && (
-          <Button type="button" onClick={addAllStudents}>
-            {kurs.name} hinzufügen
-          </Button>
-        )}
+        {data &&
+          data.filter((s) => teilnahmen.find((v) => v.studentId === s.id))
+            .length !== data?.length && (
+            <Button type="button" onClick={addAllStudents}>
+              {kurs.name} hinzufügen
+            </Button>
+          )}
       </div>
       {data &&
         data.length > 0 &&
