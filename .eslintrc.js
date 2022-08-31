@@ -14,6 +14,8 @@ module.exports = {
     'react/self-closing-comp': 'off',
     'jsx-a11y/label-has-associated-control': 'off',
     'no-console': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,

@@ -1,6 +1,7 @@
 import {
   AcademicCapIcon,
   CalendarIcon,
+  CogIcon,
   HomeIcon,
   InformationCircleIcon,
   TableIcon,
@@ -66,7 +67,7 @@ export const SideBar: React.FC = () => {
           ))}
         </nav>
       </div>
-      <div className="px-5 pb-5 flex items-center text-gray-600 text-sm font-medium">
+      <div className="px-4 pb-5 flex items-center text-gray-600 text-sm font-medium">
         <InformationCircleIcon className="mr-3 flex-shrink-0 h-6 w-6 text-gray-500" />
         Serverstatus:
         {isSuccess ? (
@@ -75,6 +76,22 @@ export const SideBar: React.FC = () => {
           <div className="ml-2 h-2 w-2 bg-red-500 rounded-full" />
         )}
       </div>
+      <nav className="mb-5 px-2 bg-white space-y-1">
+        <Link to="/settings">
+          <div
+            className={clsx(
+              location.pathname === '/settings' ||
+                location.pathname.includes('/settings')
+                ? 'bg-gray-100 text-gray-900'
+                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+              'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+            )}
+          >
+            <CogIcon className="mr-3 flex-shrink-0 h-6 w-6 text-gray-500" />
+            Einstellungen
+          </div>
+        </Link>
+      </nav>
     </div>
   );
 };

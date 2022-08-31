@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import Module from './pages/Module';
 import Modules from './pages/Modules';
 import Pruefungstermine from './pages/Pruefungstermine';
+import Settings from './pages/Settings';
 import Students from './pages/Students';
 import Teilnahmen from './pages/Teilnahmen';
 
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="module/:id" element={<Module />} />
           <Route path="pruefungstermine" element={<Pruefungstermine />} />
           <Route path="pruefungstermine/:id" element={<Teilnahmen />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </Router>
