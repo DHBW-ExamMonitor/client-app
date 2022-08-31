@@ -46,7 +46,7 @@ export const Teilnahme: React.FC<TeilnahmeProps> = ({
             <>{capitalize(teilnahme.pruefungsteilnahmeStatus.toString())}</>
           ) : (
             <>
-              <div>Kein Status</div>
+              <div>Keine Teilnahme</div>
             </>
           )}
         </td>
@@ -54,29 +54,29 @@ export const Teilnahme: React.FC<TeilnahmeProps> = ({
           {teilnahme && <>{teilnahme.notizen}</>}
         </td>
         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-          {student.studentenStatus !== 'EXMATRIKULIERT' && (
+          {!teilnahme?.versuch ? (
             <>
-              {!teilnahme?.versuch ? (
-                <Button type="button" onClick={() => setAdd(true)}>
-                  Hinzufügen
-                </Button>
-              ) : (
-                <ActionIcons
-                  editAction={() => setEdit(true)}
-                  deleteAction={() => setDeleteOpen(true)}
-                />
+              {student.studentenStatus === 'EXMATRIKULIERT' && (
+                <span className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  (exmatrikuliert)
+                </span>
               )}
+              <Button type="button" onClick={() => setAdd(true)}>
+                Hinzufügen
+              </Button>
             </>
-          )}
-          {student.studentenStatus === 'EXMATRIKULIERT' && (
-            <Button
-              className="hover:cursor-default"
-              type="button"
-              secondary
-              disabled
-            >
-              exmatrikuliert
-            </Button>
+          ) : (
+            <span className="flex flex-row justify-end">
+              {student.studentenStatus === 'EXMATRIKULIERT' && (
+                <span className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  (exmatrikuliert)
+                </span>
+              )}
+              <ActionIcons
+                editAction={() => setEdit(true)}
+                deleteAction={() => setDeleteOpen(true)}
+              />
+            </span>
           )}
         </td>
       </tr>

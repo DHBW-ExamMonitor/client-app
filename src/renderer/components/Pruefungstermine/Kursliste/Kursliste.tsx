@@ -41,16 +41,14 @@ export const Kursliste: React.FC<KurslisteProps> = ({
 
   const addAllStudents = async () => {
     if (data) {
-      data
-        .filter((s) => s.studentenStatus !== 'EXMATRIKULIERT')
-        .forEach((student) => {
-          mutate({
-            versuch: 'ERSTVERSUCH',
-            studentId: student.id,
-            pruefungsterminId: terminId,
-            pruefungsteilnahmeStatus: 'KEIN_STATUS',
-          });
+      data.forEach((student) => {
+        mutate({
+          versuch: 'ERSTVERSUCH',
+          studentId: student.id,
+          pruefungsterminId: terminId,
+          pruefungsteilnahmeStatus: 'KEIN_STATUS',
         });
+      });
     }
   };
 
@@ -60,9 +58,11 @@ export const Kursliste: React.FC<KurslisteProps> = ({
         <div className="w-48 mr-8 text-xl font-semibold text-gray-900">
           {kurs.name}
         </div>
-        <Button type="button" onClick={addAllStudents}>
-          Alle hinzufügen
-        </Button>
+        {teilnahmen.length !== data?.length && (
+          <Button type="button" onClick={addAllStudents}>
+            Alle hinzufügen
+          </Button>
+        )}
       </div>
       {data &&
         data.length > 0 &&
