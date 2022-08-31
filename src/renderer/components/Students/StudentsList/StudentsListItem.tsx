@@ -59,7 +59,7 @@ export const StudentsListItem: React.FC<StudentsListItemProps> = ({
       <tr>
         <TableData
           data={student?.matrikelnummer}
-          className="pl-4 pr-3 font-medium text-gray-900 sm_pl-6"
+          className="pl-4 pr-3 font-medium text-gray-900 sm:pl-6"
         />
         <TableData data={student.name} />
         <TableData data={capitalize(student.studentenStatus)} />
