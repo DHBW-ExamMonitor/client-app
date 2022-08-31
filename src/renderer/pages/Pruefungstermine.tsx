@@ -90,7 +90,7 @@ export const Modules: React.FC = () => {
                   <CheckboxField
                     field={field}
                     meta={meta}
-                    label="Nur Prüfungstermine mit leeren Räumen anzeigen."
+                    label="Nur Prüfungstermine ohne Räume anzeigen."
                     onChange={(e) => {
                       field.onChange(e);
                       submitForm();
@@ -103,7 +103,7 @@ export const Modules: React.FC = () => {
                   <CheckboxField
                     field={field}
                     meta={meta}
-                    label="Nur Prüfungstermine mit leeren Aufsichtspersonen anzeigen."
+                    label="Nur Prüfungstermine ohne Aufsichtspersonen anzeigen."
                     onChange={(e) => {
                       field.onChange(e);
                       submitForm();
