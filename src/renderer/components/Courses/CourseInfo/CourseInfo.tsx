@@ -19,7 +19,11 @@ export const CourseInfo: React.FC<CourseInfoProps> = ({ course }) => {
         </div>
         <div className="text-sm text-gray-500 flex-col">
           <div>{course?.name}</div>
-          <div>{format(new Date(course?.studienende), 'dd.MM.yyyy')}</div>
+          <div>
+            {course &&
+              course.studienende &&
+              format(new Date(course?.studienende), 'dd.MM.yyyy')}
+          </div>
         </div>
       </div>
     </>
