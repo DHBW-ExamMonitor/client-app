@@ -25,6 +25,7 @@ export const StudentsImporter: React.FC<StudentsImporterProps> = ({
       <Importer
         assumeNoHeaders={false}
         restartable={false}
+        delimitersToGuess={[',', ';']}
         processChunk={async (rows) => {
           // eslint-disable-next-line no-restricted-syntax
           for await (const row of rows) {
