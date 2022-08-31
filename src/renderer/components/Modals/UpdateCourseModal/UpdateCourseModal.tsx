@@ -49,7 +49,6 @@ export const UpdateCourseModal: React.FC<UpdateCourseModalProps> = ({
         }}
         validationSchema={createAndUpdateCourseFormValidationSchema}
         onSubmit={async (values) => {
-          console.log(values);
           try {
             mutate({
               id: course.id,

@@ -13,7 +13,6 @@ export const createAndUpdateStudentFormValidationSchema = Yup.object({
     .test({
       message: 'Wählen Sie einen Kurs.',
       test: (arr) => {
-        console.log(arr);
         return arr !== 'Auswählen...';
       },
     })

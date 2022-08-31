@@ -48,7 +48,6 @@ export const CreateStudentModal: React.FC<CreateStudentModalProps> = ({
         }}
         validationSchema={createAndUpdateStudentFormValidationSchema}
         onSubmit={(values) => {
-          console.log(values);
           try {
             mutate(values);
             setOpen(false);

@@ -15,7 +15,6 @@ export const StudentsImporter: React.FC<StudentsImporterProps> = ({
   kursId,
 }) => {
   const navigate = useNavigate();
-  console.log(kursId);
 
   return (
     <>
