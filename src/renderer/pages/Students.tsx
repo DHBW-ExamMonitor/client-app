@@ -50,7 +50,7 @@ export const Students: React.FC = () => {
       <PageLayout
         title="Studierende"
         subTitle="Alle Studierenden mit Matrikelnummer."
-        buttonText="Neue Studierende Person"
+        buttonText="Neue/r Studierende/r"
         buttonAction={() => setOpen(true)}
         buttonIcon={<PlusIcon className="h-5 w-5 mr-2" />}
       >
