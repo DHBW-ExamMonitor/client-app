@@ -52,6 +52,7 @@ export const Kursliste: React.FC<KurslisteProps> = ({
           });
         });
     }
+    queryClient.invalidateQueries('csvdata');
   };
 
   return (

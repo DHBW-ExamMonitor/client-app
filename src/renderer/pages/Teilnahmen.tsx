@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import api from 'renderer/api/api';
+import api, { queryClient } from 'renderer/api/api';
 import { getPruefungsteilnahme } from 'renderer/api/pruefungsteilnahme';
 import { getPruefungstermin } from 'renderer/api/pruefungstermine';
 import PageLayout from 'renderer/components/PageLayout';
@@ -22,6 +22,9 @@ export const Teilnahmen: React.FC = () => {
       onError: (error) => {
         console.log(error);
       },
+      onSuccess: () => {
+        queryClient.invalidateQueries('csvdata');
+      },
     }
   );
   const teilnahmen = useQuery(
@@ -31,6 +34,9 @@ export const Teilnahmen: React.FC = () => {
     {
       onError: (error) => {
         console.log(error);
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries('csvdata');
       },
     }
   );
