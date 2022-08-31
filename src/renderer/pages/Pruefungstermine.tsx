@@ -1,7 +1,6 @@
 import { PlusIcon } from '@heroicons/react/outline';
 import { Field, FieldProps, Form, Formik } from 'formik';
-import React, { useEffect } from 'react';
-import toast from 'react-hot-toast';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getModules } from 'renderer/api/modules';
 import { getPruefungstermine } from 'renderer/api/pruefungstermine';
@@ -17,105 +16,50 @@ import { Pruefungstermine } from 'renderer/types/pruefungstermin';
 export const Modules: React.FC = () => {
   const { data } = useQuery('pruefungstermine', getPruefungstermine);
   const modules = useQuery('modules', getModules);
-  const [open, setOpen] = React.useState(false);
-  const [showEmptyRooms, setShowEmptyRooms] = React.useState(false);
-  const [showEmptySupervisors, setShowEmptySupervisors] = React.useState(false);
-  const [showNextThreeMonths, setShowNextThreeMonths] = React.useState(false);
-  const [filteredData, setFilteredData] = React.useState<
-    Pruefungstermine | undefined
-  >([]);
+  const [open, setOpen] = useState(false);
+  const [showEmptyRooms, setShowEmptyRooms] = useState(false);
+  const [showEmptySupervisors, setShowEmptySupervisors] = useState(false);
+  const [showNextThreeMonths, setShowNextThreeMonths] = useState(false);
+  const [filteredData, setFilteredData] = useState<Pruefungstermine>([]);
+
+  const filter = async (
+    d: Pruefungstermine,
+    ser: boolean,
+    ses: boolean,
+    sntm: boolean
+  ) => {
+    if (d && d.length) {
+      const temp: Pruefungstermine = [];
+
+      // eslint-disable-next-line no-restricted-syntax
+      for await (const pt of d) {
+        const now: Date = new Date(Date.now());
+        const inThreeMonths = new Date(
+          new Date(Date.now()).setMonth(now.getMonth() + 3)
+        );
+        const ptDate: Date = new Date(pt.dateTime);
+        let add = true;
+
+        if (ser && pt.raeume.length !== 0) {
+          add = false;
+        } else if (ses && pt.aufsichtsPersonen.length !== 0) {
+          add = false;
+        } else if ((sntm && ptDate < now) || ptDate > inThreeMonths) {
+          add = false;
+        }
+        if (add) temp.push(pt);
+      }
+      setFilteredData([...temp]);
+    }
+  };
 
   useEffect(() => {
-    const temp: Pruefungstermine = [];
-    try {
-      data?.every((pt) => {
-        if (!showNextThreeMonths && !showEmptyRooms && !showEmptySupervisors) {
-          temp.push(pt);
-          return true;
-        }
-        if (
-          showNextThreeMonths &&
-          new Date(pt.dateTime) > new Date() &&
-          new Date(pt.dateTime) <
-            new Date(new Date().setMonth(new Date().getMonth() + 3)) &&
-          showEmptyRooms &&
-          pt.raeume.length === 0 &&
-          showEmptySupervisors &&
-          pt.aufsichtsPersonen.length === 0
-        ) {
-          temp.push(pt);
-          return true;
-        }
-        if (
-          !showEmptyRooms &&
-          showNextThreeMonths &&
-          new Date(pt.dateTime) > new Date() &&
-          new Date(pt.dateTime) <
-            new Date(new Date().setMonth(new Date().getMonth() + 3)) &&
-          showEmptySupervisors &&
-          pt.aufsichtsPersonen.length === 0
-        ) {
-          temp.push(pt);
-          return true;
-        }
-        if (
-          showNextThreeMonths &&
-          new Date(pt.dateTime) > new Date() &&
-          new Date(pt.dateTime) <
-            new Date(new Date().setMonth(new Date().getMonth() + 3)) &&
-          showEmptyRooms &&
-          pt.raeume.length === 0 &&
-          !showEmptySupervisors
-        ) {
-          temp.push(pt);
-          return true;
-        }
-        if (
-          !showNextThreeMonths &&
-          showEmptyRooms &&
-          pt.raeume.length === 0 &&
-          showEmptySupervisors &&
-          pt.aufsichtsPersonen.length === 0
-        ) {
-          temp.push(pt);
-          return true;
-        }
-        if (
-          !showNextThreeMonths &&
-          !showEmptyRooms &&
-          showEmptySupervisors &&
-          pt.aufsichtsPersonen.length === 0
-        ) {
-          temp.push(pt);
-          return true;
-        }
-        if (
-          !showNextThreeMonths &&
-          !showEmptySupervisors &&
-          showEmptyRooms &&
-          pt.raeume.length === 0
-        ) {
-          temp.push(pt);
-          return true;
-        }
-        if (
-          !showEmptyRooms &&
-          !showEmptySupervisors &&
-          showNextThreeMonths &&
-          new Date(pt.dateTime) > new Date() &&
-          new Date(pt.dateTime) <
-            new Date(new Date().setMonth(new Date().getMonth() + 3))
-        ) {
-          temp.push(pt);
-          return true;
-        }
-        return true;
-      });
-    } catch (e) {
-      toast.error('Es ist ein Fehler beim Anfragen der Daten aufgetreten.');
-    } finally {
-      setFilteredData(temp);
-    }
+    filter(
+      data ?? [],
+      showEmptyRooms,
+      showEmptySupervisors,
+      showNextThreeMonths
+    );
   }, [data, showEmptyRooms, showEmptySupervisors, showNextThreeMonths]);
 
   return (
@@ -189,7 +133,7 @@ export const Modules: React.FC = () => {
           )}
         </Formik>
         <PTList
-          data={filteredData?.sort(
+          data={filteredData.sort(
             (a, b) =>
               new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime()
           )}
