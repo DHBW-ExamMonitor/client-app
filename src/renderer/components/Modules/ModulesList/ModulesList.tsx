@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Switch from 'renderer/components/Ui/Switch';
+import TableHead from 'renderer/components/Ui/TableHead';
 import { Modules } from 'renderer/types/module';
 import ModulesListItem from './ModulesListItem';
 
@@ -40,27 +41,10 @@ export const ModulesList: React.FC<ModulesListProps> = ({ data }) => {
           <table className="min-w-full divide-y divide-gray-300">
             <thead className="bg-gray-50">
               <tr>
-                <th
-                  scope="col"
-                  className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                >
-                  Name
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Vorlesungen
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Aktiv
-                </th>
-                <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                  <span className="sr-only">Edit</span>
-                </th>
+                <TableHead name="Name" className="sm:pl-6" />
+                <TableHead name="Vorlesungen" />
+                <TableHead name="Aktiv" />
+                <TableHead name="" />
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">

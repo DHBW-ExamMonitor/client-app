@@ -8,6 +8,7 @@ import { getModules } from 'renderer/api/modules';
 import { getPruefungstermineByModuleId } from 'renderer/api/pruefungstermine';
 import PageLayout from 'renderer/components/PageLayout';
 import Dropdown from 'renderer/components/Ui/Dropdown';
+import TableHead from 'renderer/components/Ui/TableHead';
 
 /**
  * Module Component
@@ -85,48 +86,13 @@ export const Module: React.FC = () => {
           <table className="min-w-full divide-y divide-gray-300">
             <thead className="bg-gray-50">
               <tr>
-                <th
-                  scope="col"
-                  className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                >
-                  Name
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Termin
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Kurse
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Hilfsmittel
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Räume
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Aufsichtspersonen
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Notizen
-                </th>
+                <TableHead name="Name" className="sm:pl-6" />
+                <TableHead name="Termin" />
+                <TableHead name="Kurse" />
+                <TableHead name="Hilfsmittel" />
+                <TableHead name="Räume" />
+                <TableHead name="Aufsichtspersonen" />
+                <TableHead name="Notizen" />
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">

@@ -6,6 +6,7 @@ import {
 } from 'renderer/api/pruefungsteilnahme';
 import { getStudentsByCourse } from 'renderer/api/students';
 import Button from 'renderer/components/Ui/Button';
+import TableHead from 'renderer/components/Ui/TableHead';
 import { Course } from 'renderer/types/course';
 import { Pruefungsteilnahmen } from 'renderer/types/pruefungsteilnahme';
 import Teilnahme from './Teilnahme';
@@ -72,36 +73,11 @@ export const Kursliste: React.FC<KurslisteProps> = ({
             <table className="min-w-full divide-y divide-gray-300">
               <thead className="bg-gray-50">
                 <tr>
-                  <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                  >
-                    Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Versuch
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Status
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Notizen
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    {' '}
-                  </th>
+                  <TableHead name="Name" className="sm:pl-6" />
+                  <TableHead name="Versuch" />
+                  <TableHead name="Status" />
+                  <TableHead name="Notizen" />
+                  <TableHead name="" />
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
@@ -129,36 +105,11 @@ export const Kursliste: React.FC<KurslisteProps> = ({
             <table className="min-w-full divide-y divide-gray-300">
               <thead className="bg-gray-50">
                 <tr>
-                  <th
-                    scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-                  >
-                    Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Versuch
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Status
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    Notizen
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                  >
-                    {' '}
-                  </th>
+                  <TableHead name="Name" className="sm:pl-6" />
+                  <TableHead name="Versuch" />
+                  <TableHead name="Status" />
+                  <TableHead name="Notizen" />
+                  <TableHead name="" />
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">

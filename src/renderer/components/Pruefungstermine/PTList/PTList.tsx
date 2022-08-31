@@ -1,3 +1,4 @@
+import TableHead from 'renderer/components/Ui/TableHead';
 import { Modules } from 'renderer/types/module';
 import { Pruefungstermine } from 'renderer/types/pruefungstermin';
 import PTListItem from './PTListItem';
@@ -25,59 +26,15 @@ export const PTList: React.FC<PTListProps> = ({
       <table className="min-w-full divide-y divide-gray-300">
         <thead className="bg-gray-50">
           <tr>
-            <th
-              scope="col"
-              className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-            >
-              Name
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Termin
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Modul
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Kurse
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Hilfsmittel
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Räume
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Aufsichtspersonen
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Notizen
-            </th>
-            {!disableActions && (
-              <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-                <span className="sr-only">Edit</span>
-              </th>
-            )}
+            <TableHead name="Name" className="sm:pl-6" />
+            <TableHead name="Termin" />
+            <TableHead name="Modul" />
+            <TableHead name="Kurse" />
+            <TableHead name="Hilfsmittel" />
+            <TableHead name="Räume" />
+            <TableHead name="Aufsichtspersonen" />
+            <TableHead name="Notizen" />
+            {!disableActions && <TableHead name="" />}
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">

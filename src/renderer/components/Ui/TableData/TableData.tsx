@@ -11,16 +11,14 @@ export interface TableDataProps {
  */
 export const TableData: React.FC<TableDataProps> = ({ data, className }) => {
   return (
-    <div className={clsx('', className)}>
-      <td
-        className={clsx(
-          'whitespace-nowrap px-3 py-4 text-sm text-gray-500',
-          className
-        )}
-      >
-        {data}
-      </td>
-    </div>
+    <td
+      className={clsx(
+        'whitespace-nowrap px-3 py-4 text-sm text-gray-500',
+        className
+      )}
+    >
+      {data}
+    </td>
   );
 };
 

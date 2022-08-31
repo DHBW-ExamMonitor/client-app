@@ -1,4 +1,5 @@
 import React from 'react';
+import TableHead from 'renderer/components/Ui/TableHead';
 import { Students } from 'renderer/types/student';
 import StudentsListItem from './StudentsListItem';
 
@@ -22,33 +23,11 @@ export const StudentsList: React.FC<StudentsListProps> = ({ data }) => {
       <table className="min-w-full divide-y divide-gray-300">
         <thead className="bg-gray-50">
           <tr>
-            <th
-              scope="col"
-              className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
-            >
-              Matrikelnummer
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Name
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Status
-            </th>
-            <th
-              scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-            >
-              Kurs
-            </th>
-            <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-6">
-              <span className="sr-only">Edit</span>
-            </th>
+            <TableHead name="Matrikelnummer" className="sm:pl-6" />
+            <TableHead name="Name" />
+            <TableHead name="Status" />
+            <TableHead name="Kurs" />
+            <TableHead name="" />
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200 bg-white">
