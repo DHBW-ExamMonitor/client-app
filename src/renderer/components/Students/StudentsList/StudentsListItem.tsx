@@ -38,8 +38,8 @@ export const StudentsListItem: React.FC<StudentsListItemProps> = ({
       <WarningDialog
         open={openWarningDialog}
         setOpen={setOpenWarningDialog}
-        title={`Kurs "${student.name}" wirklich löschen?`}
-        message="Beim Löschen eines Kurses werden alle zugehörigen Studierenden inklusive ihrer Prüfungsteilnahmen und den zugehörigen Terminen gelöscht. Sind Sie sicher?"
+        title={`Studierende/n "${student.name}" wirklich löschen?`}
+        message="Beim Löschen eines/r Studierenden werden alle zugehörigen Studierenden inklusive ihrer Prüfungsteilnahmen und den zugehörigen Terminen gelöscht. Sind Sie sicher?"
         action={async () => {
           try {
             await deleteStudent(student.id);
