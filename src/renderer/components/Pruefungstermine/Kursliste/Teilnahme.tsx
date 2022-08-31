@@ -30,7 +30,10 @@ export const Teilnahme: React.FC<TeilnahmeProps> = ({
   return (
     <>
       <tr>
-        <TableData data={student.name} className="pl-6" />
+        <TableData
+          data={student.name}
+          className="sm:pl-6 text-gray-900 font-medium"
+        />
         <TableData
           data={
             teilnahme
