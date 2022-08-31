@@ -7,6 +7,7 @@ import CreatePruefungsteilnahmeModal from 'renderer/components/Modals/CreatePrue
 import UpdatePruefungsteilnahmeModal from 'renderer/components/Modals/UpdatePruefungsteilnahmeModal';
 import ActionIcons from 'renderer/components/Ui/ActionIcons';
 import Button from 'renderer/components/Ui/Button';
+import TableData from 'renderer/components/Ui/TableData';
 import WarningDialog from 'renderer/components/Ui/WarningDialog';
 import { Pruefungsteilnahme } from 'renderer/types/pruefungsteilnahme';
 import { Student } from 'renderer/types/student';
@@ -29,30 +30,22 @@ export const Teilnahme: React.FC<TeilnahmeProps> = ({
   return (
     <>
       <tr>
-        <td className="whitespace-nowrap px-3 py-4 pl-6 text-sm text-gray-500">
-          {student.name}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {teilnahme ? (
-            <>{capitalize(teilnahme.versuch.toString())}</>
-          ) : (
-            <>
-              <div>Keine Teilnahme</div>
-            </>
-          )}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {teilnahme ? (
-            <>{capitalize(teilnahme.pruefungsteilnahmeStatus.toString())}</>
-          ) : (
-            <>
-              <div>Keine Teilnahme</div>
-            </>
-          )}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {teilnahme && <>{teilnahme.notizen}</>}
-        </td>
+        <TableData data={student.name} className="pl-6" />
+        <TableData
+          data={
+            teilnahme
+              ? capitalize(teilnahme.versuch.toString())
+              : 'Keine Teilnahme'
+          }
+        />
+        <TableData
+          data={
+            teilnahme
+              ? capitalize(teilnahme.pruefungsteilnahmeStatus.toString())
+              : 'Keine Teilnahme'
+          }
+        />
+        <TableData data={teilnahme?.notizen ?? ''} />
         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
           {!teilnahme?.versuch ? (
             <>

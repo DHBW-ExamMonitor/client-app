@@ -13,6 +13,7 @@ import { Modules } from 'renderer/types/module';
 import { Pruefungstermin } from 'renderer/types/pruefungstermin';
 import * as ics from 'ics';
 import downloadFile from 'renderer/downloadFile';
+import TableData from 'renderer/components/Ui/TableData';
 
 export interface PTListItemProps {
   pruefungstermin: Pruefungstermin;
@@ -78,27 +79,17 @@ export const PTListItem: React.FC<PTListItemProps> = ({
             <Button type="button">{pruefungstermin.name}</Button>
           </Link>
         </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {format(new Date(pruefungstermin.dateTime), 'dd.MM.yyyy HH:mm')}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {pruefungstermin.modul.name}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {pruefungstermin.kurse.map((kurs) => kurs.name).join(', ')}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {pruefungstermin.hilfsmittel}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {pruefungstermin.raeume}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {pruefungstermin.aufsichtsPersonen}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {pruefungstermin.notizen}
-        </td>
+        <TableData
+          data={format(new Date(pruefungstermin.dateTime), 'dd.MM.yyyy HH:mm')}
+        />
+        <TableData data={pruefungstermin.modul.name} />
+        <TableData
+          data={pruefungstermin.kurse.map((kurs) => kurs.name).join(', ')}
+        />
+        <TableData data={pruefungstermin.hilfsmittel ?? ''} />
+        <TableData data={pruefungstermin.raeume} />
+        <TableData data={pruefungstermin.aufsichtsPersonen} />
+        <TableData data={pruefungstermin.notizen} />
 
         {!disableActions && (
           <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">

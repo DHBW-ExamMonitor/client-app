@@ -7,6 +7,7 @@ import { deleteStudent } from 'renderer/api/students';
 import capitalize from 'renderer/capitalize';
 import UpdateStudentModal from 'renderer/components/Modals/UpdateStudentModal';
 import ActionIcons from 'renderer/components/Ui/ActionIcons';
+import TableData from 'renderer/components/Ui/TableData';
 import WarningDialog from 'renderer/components/Ui/WarningDialog';
 import { Student } from 'renderer/types/student';
 
@@ -56,18 +57,13 @@ export const StudentsListItem: React.FC<StudentsListItemProps> = ({
         actionText="Löschen"
       />
       <tr>
-        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-          {student?.matrikelnummer}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {student.name}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {capitalize(student.studentenStatus)}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {course?.name}
-        </td>
+        <TableData
+          data={student?.matrikelnummer}
+          className="pl-4 pr-3 font-medium text-gray-900 sm_pl-6"
+        />
+        <TableData data={student.name} />
+        <TableData data={capitalize(student.studentenStatus)} />
+        <TableData data={course?.name ?? ''} />
         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
           <ActionIcons
             editAction={() => setUpdateStudentModalOpen(true)}

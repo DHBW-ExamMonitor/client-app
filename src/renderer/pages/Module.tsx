@@ -8,6 +8,7 @@ import { getModules } from 'renderer/api/modules';
 import { getPruefungstermineByModuleId } from 'renderer/api/pruefungstermine';
 import PageLayout from 'renderer/components/PageLayout';
 import Dropdown from 'renderer/components/Ui/Dropdown';
+import TableData from 'renderer/components/Ui/TableData';
 import TableHead from 'renderer/components/Ui/TableHead';
 
 /**
@@ -98,31 +99,25 @@ export const Module: React.FC = () => {
             <tbody className="divide-y divide-gray-200 bg-white">
               {filteredData?.map((pruefungstermin) => (
                 <tr>
-                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                    {pruefungstermin.name}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {format(
+                  <TableData
+                    data={pruefungstermin.name}
+                    className="pl-4 pr-3 font-medium text-gray-900 sm:pl-6"
+                  />
+                  <TableData
+                    data={format(
                       new Date(pruefungstermin.dateTime),
                       'dd.MM.yyyy HH:mm'
                     )}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {/* {pruefungstermin.kurse.map((kurs) => kurs.name).join(', ')} */}
-                    {pruefungstermin.kurse.map((kurs) => kurs.name).join(', ')}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {pruefungstermin.hilfsmittel}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {pruefungstermin.raeume}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {pruefungstermin.aufsichtsPersonen}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {pruefungstermin.notizen}
-                  </td>
+                  />
+                  <TableData
+                    data={pruefungstermin.kurse
+                      .map((kurs) => kurs.name)
+                      .join(', ')}
+                  />
+                  <TableData data={pruefungstermin.hilfsmittel ?? ''} />
+                  <TableData data={pruefungstermin.raeume} />
+                  <TableData data={pruefungstermin.aufsichtsPersonen} />
+                  <TableData data={pruefungstermin.notizen} />
                 </tr>
               ))}
             </tbody>
