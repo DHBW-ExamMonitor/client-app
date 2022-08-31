@@ -12,6 +12,7 @@ import WarningDialog from 'renderer/components/Ui/WarningDialog';
 import { Modules } from 'renderer/types/module';
 import { Pruefungstermin } from 'renderer/types/pruefungstermin';
 import * as ics from 'ics';
+import downloadFile from 'renderer/downloadFile';
 
 export interface PTListItemProps {
   pruefungstermin: Pruefungstermin;
@@ -30,22 +31,6 @@ export const PTListItem: React.FC<PTListItemProps> = ({
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
   const [openWarningDialog, setOpenWarningDialog] = useState<boolean>(false);
   const [copyModalOpen, setCopyModalOpen] = useState<boolean>(false);
-
-  function downloadFile(config: {
-    fileContents: string;
-    fileName: string;
-    mimeType: string;
-  }) {
-    const { mimeType, fileContents, fileName } = config;
-    const blob = new Blob([fileContents], { type: mimeType });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.setAttribute('href', url);
-    link.setAttribute('download', fileName);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
 
   const download = () => {
     const start = new Date(pruefungstermin.dateTime);
