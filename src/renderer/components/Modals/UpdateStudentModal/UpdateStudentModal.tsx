@@ -49,7 +49,6 @@ export const UpdateStudentModal: React.FC<UpdateStudentModalProps> = ({
         }}
         validationSchema={createAndUpdateStudentFormValidationSchema}
         onSubmit={(values) => {
-          console.log(values);
           try {
             mutate({
               id: student.id,

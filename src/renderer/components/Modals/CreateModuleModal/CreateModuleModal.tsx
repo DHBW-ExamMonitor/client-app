@@ -42,7 +42,6 @@ export const CreateModuleModal: React.FC<CreateModuleModalProps> = ({
         }}
         validationSchema={createAndUpdateModulesFormValidationSchema}
         onSubmit={(values) => {
-          console.log(values);
           try {
             mutate(values);
           } catch (error) {

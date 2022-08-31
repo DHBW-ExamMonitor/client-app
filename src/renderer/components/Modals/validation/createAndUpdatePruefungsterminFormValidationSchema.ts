@@ -17,7 +17,6 @@ export const createAndUpdatePruefungsterminFormValidationSchema = Yup.object({
     .test({
       message: 'Wählen Sie ein Modul.',
       test: (arr) => {
-        console.log(arr);
         return arr !== 'Auswählen...';
       },
     })
