@@ -64,7 +64,7 @@ export const Teilnahme: React.FC<TeilnahmeProps> = ({
           ) : (
             <span className="flex flex-row justify-end">
               {student.studentenStatus === 'EXMATRIKULIERT' && (
-                <span className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                <span className="whitespace-nowrap mr-3 text-sm text-gray-500">
                   (exmatrikuliert)
                 </span>
               )}

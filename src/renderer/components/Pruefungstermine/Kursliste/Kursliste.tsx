@@ -61,7 +61,7 @@ export const Kursliste: React.FC<KurslisteProps> = ({
         </div>
         {teilnahmen.length !== data?.length && (
           <Button type="button" onClick={addAllStudents}>
-            Alle hinzufügen
+            {kurs.name} hinzufügen
           </Button>
         )}
       </div>
