@@ -53,6 +53,7 @@ export const InputField: React.FC<
       )}
       <div className="mt-1">
         <input
+          lang="de"
           {...field}
           {...props}
           id={field.name}
