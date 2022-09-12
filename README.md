@@ -54,10 +54,10 @@ npm run package-win
 .
 ├── .erb                # Electron-React-Boilerplate-Skripte
 ├── release             # Output der produktiven Anwendung
-├── package.json        # NodeJS-Projekt-Datei mit allen Abhängigkeiten und möglichen Befehlen
-├── tailwind.config.js  # Einstellungen für das TailwindCSS-Framework (z.B. Defintion der Standardfarben)
+├── package.json        # NodeJS-Projekt-Datei mit allen Abhängigkeiten und Befehlen
+├── tailwind.config.js  # Einstellungen für das TailwindCSS-Framework
 ├── assets              # Icons für die Anwendung 
 └── src                 # Quellcode
     ├── main            # Code auf System-Ebene von Electron.js
-    └── renderer        # Code der Benutzeroberfläche (speziell: React.js-Code, der durch die Anwendung gerendert wird)
+    └── renderer        # Code der Benutzeroberfläche
 ```
