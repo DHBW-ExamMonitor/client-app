@@ -12,6 +12,7 @@
   - CSS-Framework
   - Styling der React-Components mit Hilfe von durch Tailwind bereitgestellte CSS-Klassen
 - Electron-Builder (für die Erstellung der gepackten Datei (https://www.electron.build))
+- TypeScript (JavaScript mit Syntax zur Typisierung (https://www.typescriptlang.org))
 - NodeJS > v14 (https://nodejs.dev)
 
 ## Installation
