@@ -5,6 +5,7 @@
 - Electron.js (Cross-Plattform-Framework für installierbare Web-Anwendungen mit HTML, JS und CSS (https://www.electronjs.org))
   - Build von Anwendungen für die Plattformen Windows, macOS und Linux
   - Einbindung systemspezifischer Funktionalitäten in Web-Anwendungen
+  - Aufbau in Anlehnung an https://electron-react-boilerplate.js.org
 - React.js (https://reactjs.org)
   - JavaScript-Library zur Entwicklung von Benutzeroberflächen
   - Unterstützung von atomarem Design durch Function-Components
@@ -51,8 +52,12 @@ npm run package-win
 
 ```
 .
-├── release   # Output der produktiven Anwendung
-└── src       # Quellcode
-    ├── main      # Code auf System-Ebene von Electron.js
-    └── renderer  # Code der Benutzeroberfläche (speziell: React.js-Code, der durch die Anwendung gerendert wird)
+├── .erb                # Electron-React-Boilerplate-Skripte
+├── release             # Output der produktiven Anwendung
+├── package.json        # NodeJS-Projekt-Datei mit allen Abhängigkeiten und möglichen Befehlen
+├── tailwind.config.js  # Einstellungen für das TailwindCSS-Framework (z.B. Defintion der Standardfarben)
+├── assets              # Icons für die Anwendung 
+└── src                 # Quellcode
+    ├── main            # Code auf System-Ebene von Electron.js
+    └── renderer        # Code der Benutzeroberfläche (speziell: React.js-Code, der durch die Anwendung gerendert wird)
 ```
