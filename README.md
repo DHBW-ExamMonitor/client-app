@@ -50,6 +50,13 @@ Anwendung spezifisch für Windows erstellen:
 $ npm run package-win
 ```
 
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+
 ## Verzeichnis
 
 ```
