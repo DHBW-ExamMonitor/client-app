@@ -46,3 +46,13 @@ Anwendung spezifisch für Windows erstellen:
 ```bash
 npm run package-win
 ```
+
+## Verzeichnis
+
+```
+.
+├── release   # Output der produktiven Anwendung
+└── src       # Quellcode
+    ├── main      # Code auf System-Ebene von Electron.js
+    └── renderer  # Code der Benutzeroberfläche (speziell: React.js-Code, der durch die Anwendung gerendert wird)
+```
