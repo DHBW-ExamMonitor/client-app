@@ -23,7 +23,7 @@ Projekt: https://github.com/DHBW-ExamMonitor/client-app
 Node Modules installieren:
 
 ```bash
-npm install
+$ npm install
 ```
 
 ## Entwicklungs-Anwendung
@@ -33,7 +33,7 @@ Die Anwendung kann im Entwicklungsmodus gestartet werden und erlaubt somit einen
 Anwendung im Entwicklungsmodus starten:
 
 ```bash
-npm start
+$ npm start
 ```
 
 ## Produktiv-Anwendung
@@ -41,13 +41,13 @@ npm start
 Anwendung für die lokale Plattform erstellen:
 
 ```bash
-npm run package
+$ npm run package
 ```
 
 Anwendung spezifisch für Windows erstellen:
 
 ```bash
-npm run package-win
+$ npm run package-win
 ```
 
 ## Verzeichnis
