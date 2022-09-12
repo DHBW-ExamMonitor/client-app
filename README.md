@@ -13,7 +13,7 @@ Projekt: https://github.com/DHBW-ExamMonitor/client-app
   - Unterstützung von atomarem Design durch Function-Components
 - TailwindCSS (https://tailwindcss.com)
   - CSS-Framework
-  - Styling der React-Components mit Hilfe von durch Tailwind bereitgestellte CSS-Klassen
+  - Styling der React-Components mit Hilfe von durch Tailwind bereitgestellten CSS-Klassen
 - Electron-Builder (für die Erstellung der gepackten Datei (https://www.electron.build))
 - TypeScript (JavaScript mit Syntax zur Typisierung (https://www.typescriptlang.org))
 - NodeJS > v14 (https://nodejs.dev)
@@ -58,7 +58,7 @@ npm run package-win
 ├── release             # Output der produktiven Anwendung
 ├── package.json        # NodeJS-Projekt-Datei mit allen Abhängigkeiten und Befehlen
 ├── tailwind.config.js  # Einstellungen für das TailwindCSS-Framework
-├── assets              # Icons für die Anwendung 
+├── assets              # Icons für die Anwendung
 └── src                 # Quellcode
     ├── main            # Code auf System-Ebene von Electron.js
     └── renderer        # Code der Benutzeroberfläche
