@@ -1,5 +1,7 @@
 # DHBW-ExamMonitor Frontend
 
+Projekt: https://github.com/DHBW-ExamMonitor/client-app
+
 ## Abhängigkeiten & Technologien
 
 - Electron.js (Cross-Plattform-Framework für installierbare Web-Anwendungen mit HTML, JS und CSS (https://www.electronjs.org))
