@@ -2,14 +2,17 @@
 
 ## Abhängigkeiten & Technologien
 
-- Electron.js (Cross-Plattform-Framework für installierbare Web-Anwendungen)
-  - Build von Anwendungen für Windows, macOS und Linux
-- React.js
-  - Web-Frontend-Framework
-- TailwindCSS
-  - Styling der React-Anwendung mit Hilfe von vorgefertigten CSS-Klassen
-- Electron-Builder (für die Erstellung der gepackten Datei)
-- NodeJS > v14
+- Electron.js (Cross-Plattform-Framework für installierbare Web-Anwendungen mit HTML, JS und CSS (https://www.electronjs.org))
+  - Build von Anwendungen für die Plattformen Windows, macOS und Linux
+  - Einbindung systemspezifischer Funktionalitäten in Web-Anwendungen
+- React.js (https://reactjs.org)
+  - JavaScript-Library zur Entwicklung von Benutzeroberflächen
+  - Unterstützung von atomarem Design durch Function-Components
+- TailwindCSS (https://tailwindcss.com)
+  - CSS-Framework
+  - Styling der React-Components mit Hilfe von durch Tailwind bereitgestellte CSS-Klassen
+- Electron-Builder (für die Erstellung der gepackten Datei (https://www.electron.build))
+- NodeJS > v14 (https://nodejs.dev)
 
 ## Installation
 
